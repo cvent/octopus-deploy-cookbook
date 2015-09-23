@@ -18,7 +18,7 @@
 # limitations under the License.
 #
 
-include_recipe 'windows-octopus::tentacle'
+include_recipe 'octopus-deploy::tentacle'
 
 instance = node['octopus']['tentacle']['instance']
 
@@ -33,7 +33,7 @@ powershell_script "Boostrap Tentacle" do
   .\\Tentacle.exe configure --instance="#{instance['name']}" --trust="#{instance['trusted_cert']}" --console
   .\\Tentacle.exe service --instance="#{instance['name']}" --install --start --console
   EOH
-  not_if do ::File.exists?(instance['config_file']) && ::Win32::Service.exists?(instance['service_name']) end
+  not_if { ::File.exists?(instance['config_file']) && ::Win32::Service.exists?(instance['service_name']) }
 end
 
 # Make sure enabled and started

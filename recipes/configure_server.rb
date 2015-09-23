@@ -18,7 +18,7 @@
 # limitations under the License.
 #
 
-include_recipe 'windows-octopus::server'
+include_recipe 'octopus-deploy::server'
 
 instance = node['octopus']['server']['instance']
 
@@ -32,7 +32,7 @@ powershell_script "Boostrap Server" do
   .\\Octopus.Server.exe license --instance "#{instance['name']}" --licenseBase64 "#{instance['license']}" --wait "5000"
   .\\Octopus.Server.exe service --instance "#{instance['name']}" --install --reconfigure --start
   EOH
-  not_if do ::File.exists?(instance['config_file']) && ::Win32::Service.exists?(instance['service_name']) end
+  not_if { ::File.exists?(instance['config_file']) && ::Win32::Service.exists?(instance['service_name']) }
 end
 
 windows_service instance['service_name'] do
