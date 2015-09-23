@@ -1,8 +1,14 @@
 Octopus Deploy Cookbook
-================
+=======================
+
 [![Build Status](https://img.shields.io/travis/cvent/octopus-deploy-cookbook/master.svg?style=flat-square)](https://travis-ci.org/cvent/octopus-deploy-cookbook) [![Chef cookbook](https://img.shields.io/cookbook/v/octopus-deploy.svg?style=flat-square)](https://supermarket.chef.io/cookbooks/octopus-deploy)
 
 This cookbook is used for installing the [Octopus Deploy](http://octopusdeploy.com) server and tentacle on Microsoft Windows machines.
+
+
+## NOTICE: Pre-Release
+
+This is pre release and there will be major changes to this before its final release.  The recipes for installation and configuration will be switched into resources so people can use the library easier. Once this is found stable it will be released as version 1.0.0, until this point lock down to any minor version that you use.
 
 
 ## Usage
