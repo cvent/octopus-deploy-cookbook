@@ -1,7 +1,7 @@
 #
 # Author:: Brent Montague (<bmontague@cvent.com>)
-# Cookbook Name:: octopus-deploy
-# Recipe:: server
+# Cookbook Name:: verify-octo
+# Recipe:: audit_tentacle
 #
 # Copyright:: Copyright (c) 2015 Cvent, Inc.
 #
@@ -18,19 +18,16 @@
 # limitations under the License.
 #
 
-installer = node['octopus']['server']['installer']
-server_installer = ::File.join(Chef::Config[:file_cache_path], 'octopus-server.msi')
+install_version = "#{node['verify-octo']['tentacle']['version']}.0"
 
-remote_file server_installer do
-  source installer['url']
-  checksum installer['checksum']
+control_group 'verify-octo::tentacle' do
+  control 'Octopus Deploy Tentacle' do
+    it 'should be installed' do
+      expect(package('Octopus Deploy Tentacle')).to be_installed
+    end
+
+    it 'should be the correct version' do
+      expect(file('C:\Program Files\Octopus Deploy\Tentacle\Tentacle.exe')).to be_version(install_version)
+    end
+  end
 end
-
-windows_package installer['display_name'] do
-  action :install
-  source server_installer
-  version installer['version'] if installer['version']
-  installer_type :msi
-  options '/passive /norestart'
-end
-

@@ -7,24 +7,51 @@ This cookbook is used for installing the [Octopus Deploy](http://octopusdeploy.c
 
 
 ## NOTICE: Pre-Release
-
 This is pre release and there will be major changes to this before its final release.  The recipes for installation and configuration will be switched into resources so people can use the library easier. Once this is found stable it will be released as version 1.0.0, until this point lock down to any minor version that you use.
 
 
-## Usage
+## Resource/Provider
+### octopus_deploy_server
+#### Actions
+- :install: Install a version of Octopus Deploy server
+- :remove: Uninstall a version of the Octopus Deploy server if it is installed
+
+#### Attribute Parameters
+- :instance: Name attribute. The Octopus Deploy Server instance name (used for configuring the instance not install)
+- :version: Required. The version of Octopus Deploy Server to install
+- :checksum: The SHA256 checksum of the Octopus Deploy Server msi file to verify download
+
+#### Example
+Install version 3.1.1 of Octopus Deploy Server
+
+```ruby
+octopus_deploy_server 'OctopusServer' do
+  action :install
+  version '3.1.1'
+  checksum '<SHA256-checksum>'
+end
 
 ```
-# Installs tentacle
-include_recipe 'windows-octopus::tentacle'
 
-# Installs and configures the tentacle
-include_recipe 'windows-octopus::configure_tentacle'
+### octopus_deploy_tentacle
+#### Actions
+- :install: Install a version of Octopus Deploy Tentacle
+- :remove: Uninstall a version of the Octopus Deploy Tentacle if it is installed
 
-# Installs server
-include_recipe 'windows-octopus::server'
+#### Attribute Parameters
+- :instance: Name attribute. The Octopus Deploy Tentacle instance name (used for configuring the instance not install)
+- :version: Required. The version of Octopus Deploy Tentacle to install
+- :checksum: The SHA256 checksum of the Octopus Deploy Tentacle msi file to verify download
 
-# Installs and configures the server
-include_recipe 'windows-octopus::configure_server'
+#### Example
+Install version 3.1.1 of Octopus Deploy Tentacle
+
+```ruby
+octopus_deploy_tentacle 'Tentacle' do
+  action :install
+  version '3.1.1'
+  checksum '<SHA256-checksum>'
+end
 
 ```
 

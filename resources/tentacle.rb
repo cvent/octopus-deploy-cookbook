@@ -1,7 +1,7 @@
 #
 # Author:: Brent Montague (<bmontague@cvent.com>)
 # Cookbook Name:: octopus-deploy
-# Recipe:: default
+# Resource:: tentacle
 #
 # Copyright:: Copyright (c) 2015 Cvent, Inc.
 #
@@ -17,3 +17,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
+actions :install, :remove
+default_action :install
+
+attribute :instance, kind_of: String, name_attribute: true
+attribute :version, kind_of: String, required: true
+attribute :checksum, kind_of: String
