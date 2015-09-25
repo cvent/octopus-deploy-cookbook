@@ -1,5 +1,9 @@
+require 'stove/rake_task'
 require 'rubocop/rake_task'
 require 'foodcritic'
+
+# Publish This cookbook
+Stove::RakeTask.new
 
 # Style tests. Rubocop and Foodcritic
 namespace :style do
@@ -13,15 +17,6 @@ namespace :style do
     }
   end
 end
-
-# Style tests. Rubocop and Foodcritic
-# namespace :style do
-#   desc 'Run Ruby style checks'
-#     RuboCop::RakeTask.new(:ruby)
-#
-#       desc 'Run Chef style checks'
-#                               end
-#                               end
 
 desc 'Run all style checks'
 task style: ['style:chef', 'style:ruby']
