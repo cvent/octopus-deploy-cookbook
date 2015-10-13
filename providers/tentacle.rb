@@ -81,12 +81,12 @@ action :configure do
       .\\Tentacle.exe configure --instance="#{instance}" --trust="#{trusted_cert}" --console
       .\\Tentacle.exe service --instance="#{instance}" --install --start --console
     EOH
-    not_if do ::File.exists?(config_path) && ::Win32::Service.exists?(service_name) end
+    not_if { ::File.exist?(config_path) && ::Win32::Service.exists?(service_name) }
   end
 
   # Make sure enabled and started
   service = windows_service service_name do
-    action [ :enable, :start ]
+    action [:enable, :start]
   end
 
   new_resource.updated_by_last_action(install.updated_by_last_action? || configure.updated_by_last_action? || service.updated_by_last_action?)
@@ -117,7 +117,7 @@ def verify_version(version)
 end
 
 def convert_boolean(bool)
-  return bool ? 'True' : 'False'
+  bool ? 'True' : 'False'
 end
 
 def verify_checksum(checksum)
