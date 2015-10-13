@@ -25,6 +25,14 @@ module OctopusDeploy
       'Octopus Deploy Tentacle'
     end
 
+    def service_name(name)
+      if name == 'Tentacle'
+        'OctopusDeploy Tentacle'
+      else
+        "OctopusDeploy Tentacle: #{name}"
+      end
+    end
+
     def installer_url(version)
       "https://download.octopusdeploy.com/octopus/Octopus.Tentacle.#{version}-x64.msi"
     end

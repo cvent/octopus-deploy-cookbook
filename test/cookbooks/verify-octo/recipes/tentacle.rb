@@ -25,9 +25,10 @@ octopus_deploy_tentacle 'Tentacle' do
 end
 
 octopus_deploy_tentacle 'Tentacle' do
-  action :install
+  action :configure
   version node['verify-octo']['tentacle']['version']
   checksum node['verify-octo']['tentacle']['checksum']
+  trusted_cert '324JKSJKLSJ324DSFDF3423FDSF8783FDSFSDFS0'
 end
 
 include_recipe 'verify-octo::audit_tentacle'

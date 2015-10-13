@@ -50,6 +50,48 @@ action :install do
   new_resource.updated_by_last_action(download.updated_by_last_action? || install.updated_by_last_action?)
 end
 
+action :configure do
+  new_resource = @new_resource
+  name = new_resource.name
+  instance = new_resource.instance
+  checksum = new_resource.checksum
+  version = new_resource.version
+  home_path = new_resource.home_path
+  config_path = new_resource.config_path
+  app_path = new_resource.app_path
+  trusted_cert = new_resource.trusted_cert
+  port = new_resource.port
+  polling = convert_boolean(new_resource.polling)
+  service_name = service_name(instance)
+
+  install = octopus_deploy_tentacle name do
+    action :install
+    checksum checksum
+    version version
+  end
+
+  configure = batch 'configure-tentacle' do
+    cwd 'C:\Program Files\Octopus Deploy\Tentacle'
+    code <<-EOH
+      .\\Tentacle.exe create-instance --instance="#{instance}" --config="#{config_path}" --console
+      .\\Tentacle.exe create-instance --instance="#{instance}" --config="#{config_path}" --console
+      .\\Tentacle.exe new-certificate --instance="#{instance}" --if-blank --console
+      .\\Tentacle.exe configure --instance="#{instance}" --reset-trust --console
+      .\\Tentacle.exe configure --instance="#{instance}" --home="#{home_path}" --app="#{app_path}" --port="#{port}" --noListen="#{polling}" --console
+      .\\Tentacle.exe configure --instance="#{instance}" --trust="#{trusted_cert}" --console
+      .\\Tentacle.exe service --instance="#{instance}" --install --start --console
+    EOH
+    not_if do ::File.exists?(config_path) && ::Win32::Service.exists?(service_name) end
+  end
+
+  # Make sure enabled and started
+  service = windows_service service_name do
+    action [ :enable, :start ]
+  end
+
+  new_resource.updated_by_last_action(install.updated_by_last_action? || configure.updated_by_last_action? || service.updated_by_last_action?)
+end
+
 action :remove do
   new_resource = @new_resource
   version = new_resource.version
@@ -72,6 +114,10 @@ private
 
 def verify_version(version)
   fail 'A version is required in order to install Octopus Deploy Tentacle' unless version
+end
+
+def convert_boolean(bool)
+  return bool ? 'True' : 'False'
 end
 
 def verify_checksum(checksum)

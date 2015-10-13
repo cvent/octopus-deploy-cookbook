@@ -21,13 +21,31 @@
 install_version = "#{node['verify-octo']['tentacle']['version']}.0"
 
 control_group 'verify-octo::tentacle' do
-  control 'Octopus Deploy Tentacle' do
-    it 'should be installed' do
+  control 'Octopus Deploy Tentacle Installation' do
+    it 'should have installed' do
       expect(package('Octopus Deploy Tentacle')).to be_installed
     end
 
     it 'should be the correct version' do
       expect(file('C:\Program Files\Octopus Deploy\Tentacle\Tentacle.exe')).to be_version(install_version)
+    end
+  end
+
+  control 'Octopus Deploy Tentacle Configuration' do
+    it 'should have configured the service' do
+      expect(service('OctopusDeploy Tentacle')).to be_installed
+    end
+
+    it 'should have enabled the service' do
+      expect(service('OctopusDeploy Tentacle')).to be_enabled
+    end
+
+    it 'should have created the configuration file' do
+      expect(file('C:\Octopus\Tentacle.config')).to be_file
+    end
+
+    it 'should have created the applications directory' do
+      expect(file('C:\Octopus\Applications')).to be_directory
     end
   end
 end

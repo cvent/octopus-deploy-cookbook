@@ -18,9 +18,15 @@
 # limitations under the License.
 #
 
-actions :install, :remove
+actions :install, :configure, :remove
 default_action :install
 
-attribute :instance, kind_of: String, name_attribute: true
+attribute :instance, kind_of: String, default: 'Tentacle'
 attribute :version, kind_of: String, required: true
 attribute :checksum, kind_of: String
+attribute :home_path, kind_of: String, default: 'C:\Octopus'
+attribute :config_path, kind_of: String, default: 'C:\Octopus\Tentacle.config'
+attribute :app_path, kind_of: String, default: 'C:\Octopus\Applications'
+attribute :trusted_cert, kind_of: String
+attribute :port, kind_of: Fixnum, default: 10933
+attribute :polling, kind_of: [ TrueClass, FalseClass ], default: false

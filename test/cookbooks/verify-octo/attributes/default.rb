@@ -19,9 +19,9 @@
 #
 
 # Server test configuration
-default['verify-octo']['server']['version'] = '3.1.1'
-default['verify-octo']['server']['checksum'] = 'fb01b8b0bcab94ef3a5f9a8154faf1c4d81c9e97ce5874d80c13f64ddc93f8a1'
+default['verify-octo']['server']['version'] = '3.1.3'
+default['verify-octo']['server']['checksum'] = 'c5af09ec60d946a1c6edf564743ffc214f4ff80ff014d35805e18fa3c972da28'
 
 # Tentacle test configuration
-default['verify-octo']['tentacle']['version'] = '3.1.1'
-default['verify-octo']['tentacle']['checksum'] = '7c35f150f893471afa5712acf1e077bab581dfbf57dd5ce829824720b8d166c5'
+default['verify-octo']['tentacle']['version'] = '3.1.3'
+default['verify-octo']['tentacle']['checksum'] = 'c5b4cd6ceec977137d93711ca0ede1dde79ae30da277d70e8d70e6d148860bec'
