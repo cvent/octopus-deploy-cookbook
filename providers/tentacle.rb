@@ -71,7 +71,7 @@ action :configure do
     version version
   end
 
-  configure = batch 'configure-tentacle' do
+  configure = batch "configure-tentacle-#{instance}" do
     cwd 'C:\Program Files\Octopus Deploy\Tentacle'
     code <<-EOH
       .\\Tentacle.exe create-instance --instance="#{instance}" --config="#{config_path}" --console
@@ -88,6 +88,7 @@ action :configure do
   # Make sure enabled and started
   service = windows_service service_name do
     action [:enable, :start]
+    subscribes :restart, "batch[configure-tentacle-#{instance}]", :delayed
   end
 
   new_resource.updated_by_last_action(install.updated_by_last_action? || configure.updated_by_last_action? || service.updated_by_last_action?)
