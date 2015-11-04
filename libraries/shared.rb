@@ -24,5 +24,13 @@ module OctopusDeploy
     def fancy_bool(bool)
       bool.to_s.capitalize
     end
+
+    def actions_updated?(actions)
+      actions.any?(&:updated_by_last_action?)
+    end
+
+    def catch_powershell_error(error_text)
+      "if ( ! $? ) { throw \"ERROR: Command returned $LastExitCode #{error_text}\" }"
+    end
   end
 end

@@ -25,3 +25,5 @@ default['verify-octo']['server']['checksum'] = 'c5af09ec60d946a1c6edf564743ffc21
 # Tentacle test configuration
 default['verify-octo']['tentacle']['version'] = '3.1.3'
 default['verify-octo']['tentacle']['checksum'] = 'c5b4cd6ceec977137d93711ca0ede1dde79ae30da277d70e8d70e6d148860bec'
+default['verify-octo']['tentacle']['instance'] = 'Tentacle'
+default['verify-octo']['tentacle']['config_path'] = 'C:\\Octopus\\Tentacle.config'

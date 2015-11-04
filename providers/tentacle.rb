@@ -64,6 +64,7 @@ action :configure do
   port = new_resource.port
   polling = fancy_bool(new_resource.polling)
   service_name = service_name(instance)
+  cert_file =  new_resource.cert_file
 
   install = octopus_deploy_tentacle name do
     action :install
@@ -71,16 +72,30 @@ action :configure do
     version version
   end
 
-  configure = batch "configure-tentacle-#{instance}" do
+  generate_cert = powershell_script 'generate-tentacle-cert' do
+    cwd 'C:\Program Files\Octopus Deploy\Tentacle'
+    code <<-EOH
+      .\\Tentacle.exe new-certificate -e "#{cert_file}" --console
+      #{catch_powershell_error('Generating Cert For the Machine')}
+    EOH
+    not_if { cert_file.nil? || ::File.exist?(cert_file) }
+  end
+
+  configure = powershell_script "configure-tentacle-#{instance}" do
     cwd 'C:\Program Files\Octopus Deploy\Tentacle'
     code <<-EOH
       .\\Tentacle.exe create-instance --instance="#{instance}" --config="#{config_path}" --console
-      .\\Tentacle.exe create-instance --instance="#{instance}" --config="#{config_path}" --console
+      #{catch_powershell_error('Creating instance')}
       .\\Tentacle.exe new-certificate --instance="#{instance}" --if-blank --console
+      #{catch_powershell_error('Generating Certificate')}
       .\\Tentacle.exe configure --instance="#{instance}" --reset-trust --console
+      #{catch_powershell_error('Reseting Trust')}
       .\\Tentacle.exe configure --instance="#{instance}" --home="#{home_path}" --app="#{app_path}" --port="#{port}" --noListen="#{polling}" --console
+      #{catch_powershell_error('Configuring instance')}
       .\\Tentacle.exe configure --instance="#{instance}" --trust="#{trusted_cert}" --console
+      #{catch_powershell_error('Trusting Octopus Deploy Server')}
       .\\Tentacle.exe service --instance="#{instance}" --install --start --console
+      #{catch_powershell_error('Installing / starting service')}
     EOH
     not_if { ::File.exist?(config_path) && ::Win32::Service.exists?(service_name) }
   end
@@ -91,7 +106,7 @@ action :configure do
     subscribes :restart, "batch[configure-tentacle-#{instance}]", :delayed
   end
 
-  new_resource.updated_by_last_action(install.updated_by_last_action? || configure.updated_by_last_action? || service.updated_by_last_action?)
+  new_resource.updated_by_last_action(actions_updated?([install, generate_cert, configure, service]))
 end
 
 action :remove do
@@ -109,7 +124,7 @@ action :remove do
     version version if version
   end
 
-  new_resource.updated_by_last_action(remove.updated_by_last_action? || delete.updated_by_last_action?)
+  new_resource.updated_by_last_action(actions_updated?([remove, delete]))
 end
 
 private
