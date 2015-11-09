@@ -33,6 +33,10 @@ module OctopusDeploy
       end
     end
 
+    def tentacle_install_location
+      'C:\Program Files\Octopus Deploy\Tentacle'
+    end
+
     def installer_url(version)
       "https://download.octopusdeploy.com/octopus/Octopus.Tentacle.#{version}-x64.msi"
     end

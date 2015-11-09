@@ -73,7 +73,7 @@ action :configure do
   end
 
   generate_cert = powershell_script 'generate-tentacle-cert' do
-    cwd 'C:\Program Files\Octopus Deploy\Tentacle'
+    cwd tentacle_install_location
     code <<-EOH
       .\\Tentacle.exe new-certificate -e "#{cert_file}" --console
       #{catch_powershell_error('Generating Cert For the Machine')}
@@ -82,7 +82,7 @@ action :configure do
   end
 
   configure = powershell_script "configure-tentacle-#{instance}" do
-    cwd 'C:\Program Files\Octopus Deploy\Tentacle'
+    cwd tentacle_install_location
     code <<-EOH
       .\\Tentacle.exe create-instance --instance="#{instance}" --config="#{config_path}" --console
       #{catch_powershell_error('Creating instance')}
