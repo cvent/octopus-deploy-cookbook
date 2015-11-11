@@ -72,11 +72,19 @@ action :configure do
     version version
   end
 
+  temp_cert_file = ::File.join(Chef::Config[:file_cache_path], 'temp_config.config')
+  temp_instance = "Temp#{instance}"
   generate_cert = powershell_script 'generate-tentacle-cert' do
     cwd tentacle_install_location
     code <<-EOH
-      .\\Tentacle.exe new-certificate -e "#{cert_file}" --console
+      .\\Tentacle.exe create-instance --instance="#{temp_instance}" --config="#{temp_cert_file}" --console
+      #{catch_powershell_error('Creating temp instance to generate cert?')}
+      .\\Tentacle.exe new-certificate --instance="#{temp_instance}" -e "#{cert_file}" --console
       #{catch_powershell_error('Generating Cert For the Machine')}
+      .\\Tentacle.exe delete-instance --instance="#{temp_instance}" --console
+      #{catch_powershell_error('Could not delete temp instance')}
+      Remove-Item "#{temp_cert_file}" -Force
+      #{catch_powershell_error('Could not delete temp config file')}
     EOH
     not_if { cert_file.nil? || ::File.exist?(cert_file) }
   end
