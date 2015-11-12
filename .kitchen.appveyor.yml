@@ -1,0 +1,7 @@
+---
+driver:
+  name: localhost
+  clean_up_on_destroy: false
+
+  platforms:
+    - name: windows

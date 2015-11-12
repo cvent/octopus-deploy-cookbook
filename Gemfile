@@ -5,6 +5,10 @@ group :development do
   gem 'stove'
 end
 
+group :ci do
+  gem 'kitchen-localhost'
+end
+
 group :lint do
   gem 'foodcritic', '~> 4.0'
   gem 'rubocop', '~> 0.33'
