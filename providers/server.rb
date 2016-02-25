@@ -71,7 +71,7 @@ end
 private
 
 def verify_version(version)
-  fail 'A version is required in order to install Octopus Deploy Server' unless version
+  raise 'A version is required in order to install Octopus Deploy Server' unless version
 end
 
 def verify_checksum(checksum)
