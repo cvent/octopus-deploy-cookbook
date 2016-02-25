@@ -75,6 +75,7 @@ action :configure do
   temp_cert_file = ::File.join(Chef::Config[:file_cache_path], 'temp_config.config')
   temp_instance = "Temp#{instance}"
   generate_cert = powershell_script 'generate-tentacle-cert' do
+    action :run
     cwd tentacle_install_location
     code <<-EOH
       .\\Tentacle.exe create-instance --instance="#{temp_instance}" --config="#{temp_cert_file}" --console
@@ -89,11 +90,20 @@ action :configure do
     not_if { cert_file.nil? || ::File.exist?(cert_file) }
   end
 
-  configure = powershell_script "configure-tentacle-#{instance}" do
+  create_instance = powershell_script "create-instance-#{instance}" do
+    action :run
     cwd tentacle_install_location
     code <<-EOH
       .\\Tentacle.exe create-instance --instance="#{instance}" --config="#{config_path}" --console
       #{catch_powershell_error('Creating instance')}
+    EOH
+    not_if { ::File.exist?(config_path) }
+  end
+
+  configure = powershell_script "configure-tentacle-#{instance}" do
+    action :run
+    cwd tentacle_install_location
+    code <<-EOH
       .\\Tentacle.exe new-certificate --instance="#{instance}" --if-blank --console
       #{catch_powershell_error('Generating Certificate')}
       .\\Tentacle.exe configure --instance="#{instance}" --reset-trust --console
@@ -105,16 +115,16 @@ action :configure do
       .\\Tentacle.exe service --instance="#{instance}" --install --start --console
       #{catch_powershell_error('Installing / starting service')}
     EOH
-    not_if { ::File.exist?(config_path) && ::Win32::Service.exists?(service_name) }
+    notifies :restart, "windows_service[#{service_name}]", :delayed
+    not_if { ::Win32::Service.exists?(service_name) }
   end
 
   # Make sure enabled and started
   service = windows_service service_name do
     action [:enable, :start]
-    subscribes :restart, "batch[configure-tentacle-#{instance}]", :delayed
   end
 
-  new_resource.updated_by_last_action(actions_updated?([install, generate_cert, configure, service]))
+  new_resource.updated_by_last_action(actions_updated?([install, generate_cert, create_instance, configure, service]))
 end
 
 action :remove do
