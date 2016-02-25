@@ -30,4 +30,18 @@ control_group 'verify-octo::server' do
       expect(file('C:\Program Files\Octopus Deploy\Octopus\Octopus.Server.exe')).to be_version(install_version)
     end
   end
+
+  control 'Octopus Deploy Server Configuration' do
+    it 'should have configured the service' do
+      expect(service('OctopusDeploy')).to be_installed
+    end
+
+    it 'should have enabled the service' do
+      expect(service('OctopusDeploy')).to be_enabled
+    end
+
+    it 'should have created the configuration file' do
+      expect(file('C:\Octopus\OctopusServer.config')).to be_file
+    end
+  end
 end

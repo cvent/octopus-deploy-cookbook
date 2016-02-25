@@ -18,9 +18,17 @@
 # limitations under the License.
 #
 
-actions :install, :remove
+actions :install, :configure, :remove
 default_action :install
 
-attribute :instance, kind_of: String, name_attribute: true
+attribute :instance, kind_of: String, default: 'OctopusServer'
 attribute :version, kind_of: String, required: true
 attribute :checksum, kind_of: String
+attribute :home_path, kind_of: String, default: 'C:\Octopus'
+attribute :config_path, kind_of: String, default: 'C:\Octopus\OctopusServer.config'
+attribute :connection_string, kind_of: String
+attribute :node_name, kind_of: String
+attribute :create_database, kind_of: [TrueClass, FalseClass], default: false
+attribute :admin_user, kind_of: String
+attribute :license, kind_of: String
+attribute :start_service, kind_of: [TrueClass, FalseClass], default: true

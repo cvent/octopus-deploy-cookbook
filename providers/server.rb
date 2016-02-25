@@ -18,6 +18,7 @@
 # limitations under the License.
 #
 
+include OctopusDeploy::Shared
 include OctopusDeploy::Server
 
 use_inline_resources
@@ -48,6 +49,78 @@ action :install do
   end
 
   new_resource.updated_by_last_action(download.updated_by_last_action? || install.updated_by_last_action?)
+end
+
+action :configure do
+  new_resource = @new_resource
+  name = new_resource.name
+  instance = new_resource.instance
+  checksum = new_resource.checksum
+  version = new_resource.version
+  home_path = new_resource.home_path
+  config_path = new_resource.config_path
+  connection_string = new_resource.connection_string
+  node_name = new_resource.node_name
+  admin_user = new_resource.admin_user
+  license = new_resource.license
+  create_database = new_resource.create_database
+  start_service = new_resource.start_service
+
+  install = octopus_deploy_server name do
+    action :install
+    checksum checksum
+    version version
+  end
+
+  create_instance = powershell_script "create-instance-#{instance}" do
+    action :run
+    cwd server_install_location
+    code <<-EOH
+      .\\Octopus.Server.exe create-instance --instance "#{instance}" --config "#{config_path}" --console
+      #{catch_powershell_error('Creating instance')}
+    EOH
+    not_if { ::File.exist?(config_path) }
+  end
+
+  configure = powershell_script "configure-server-#{instance}" do # ~FC009
+    action :run
+    cwd server_install_location
+    code <<-EOH
+    .\\Octopus.Server.exe configure --instance "#{instance}" --home "#{home_path}" --console
+    #{catch_powershell_error('Configuring Home Dir')}
+    .\\Octopus.Server.exe configure --instance "#{instance}" --storageConnectionString "#{connection_string}" --console
+    #{catch_powershell_error('Configuring Database Connection')}
+    .\\Octopus.Server.exe configure --instance "#{instance}" --upgradeCheck "True" --upgradeCheckWithStatistics "True" --console
+    #{catch_powershell_error('Configuring Upgrade Checks')}
+    .\\Octopus.Server.exe configure --instance "#{instance}" --webAuthenticationMode "Domain" --console
+    #{catch_powershell_error('Configuring authentication')}
+    .\\Octopus.Server.exe configure --instance "#{instance}" --serverNodeName "#{node_name}" --console
+    #{catch_powershell_error('Configuring Cluster Node Name')}
+    .\\Octopus.Server.exe configure --instance "#{instance}" --webForceSSL "False" --webListenPrefixes "http://localhost:80/" --commsListenPort "10943" --console
+    #{catch_powershell_error('Configuring Listen Ports')}
+    #{".\\Octopus.Server.exe database --instance \"#{instance}\" --create --console #{catch_powershell_error('Create Database')}" if create_database}
+    .\\Octopus.Server.exe service --instance "#{instance}" --stop --console
+    #{catch_powershell_error('Stop Service')}
+    #{".\\Octopus.Server.exe admin --instance \"#{instance}\" --username \"#{admin_user}\" --console #{catch_powershell_error('Set administrator')}" if admin_user}
+    #{".\\Octopus.Server.exe license --instance \"#{instance}\" --licenseBase64 \"#{Base64.encode64(license)}\"--console #{catch_powershell_error('Configuring License')}" if license}
+    .\\Octopus.Server.exe service --instance "#{instance}" --install --reconfigure --console
+    #{catch_powershell_error('Create Service')}
+    EOH
+    sensitive true
+    notifies :restart, "windows_service[#{service_name}]", :delayed
+    not_if { ::Win32::Service.exists?(service_name) }
+  end
+
+  # Make sure enabled and started
+  service = windows_service service_name do
+    if start_service
+      action [:enable, :start]
+    else
+      action [:stop, :disable]
+    end
+  end
+
+  new_resource.updated_by_last_action(actions_updated?([install, create_instance, configure, service]))
 end
 
 action :remove do

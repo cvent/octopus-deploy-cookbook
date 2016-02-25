@@ -25,6 +25,14 @@ module OctopusDeploy
       'Octopus Deploy Server'
     end
 
+    def service_name
+      'OctopusDeploy'
+    end
+
+    def server_install_location
+      'C:\Program Files\Octopus Deploy\Octopus'
+    end
+
     def installer_url(version)
       "https://download.octopusdeploy.com/octopus/Octopus.#{version}-x64.msi"
     end

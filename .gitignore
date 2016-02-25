@@ -10,3 +10,4 @@ Berksfile.lock
 .kitchen/
 .kitchen.local.yml
 vendor/
+.rubocop-http*

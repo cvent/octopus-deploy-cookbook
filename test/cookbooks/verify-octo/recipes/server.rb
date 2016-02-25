@@ -25,9 +25,11 @@ octopus_deploy_server 'OctopusServer' do
 end
 
 octopus_deploy_server 'OctopusServer' do
-  action :install
+  action :configure
   version node['verify-octo']['server']['version']
   checksum node['verify-octo']['server']['checksum']
+  node_name 'octo-web-01'
+  connection_string 'Data Source=localhostdba;Initial Catalog=octo;Integrated Security=False;User ID=octo;Password=password'
 end
 
 include_recipe 'verify-octo::audit_server'
