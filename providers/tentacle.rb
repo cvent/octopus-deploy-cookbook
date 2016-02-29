@@ -27,6 +27,7 @@ action :install do
   new_resource = @new_resource
   checksum = new_resource.checksum
   version = new_resource.version
+  upgrade_version = new_resource.upgrade_version
 
   verify_version(version)
   verify_checksum(checksum)
@@ -43,7 +44,7 @@ action :install do
   install = windows_package display_name do
     action :install
     source tentacle_installer
-    version version
+    version version if version && upgrade_version
     installer_type :msi
     options '/passive /norestart'
   end
@@ -57,6 +58,7 @@ action :configure do
   instance = new_resource.instance
   checksum = new_resource.checksum
   version = new_resource.version
+  upgrade_version = new_resource.upgrade_version
   home_path = new_resource.home_path
   config_path = new_resource.config_path
   app_path = new_resource.app_path
@@ -70,6 +72,7 @@ action :configure do
     action :install
     checksum checksum
     version version
+    upgrade_version upgrade_version
   end
 
   temp_cert_file = ::File.join(Chef::Config[:file_cache_path], 'temp_config.config')
@@ -129,7 +132,6 @@ end
 
 action :remove do
   new_resource = @new_resource
-  version = new_resource.version
 
   tentacle_installer = ::File.join(Chef::Config[:file_cache_path], 'octopus-tentacle.msi')
 
@@ -139,7 +141,6 @@ action :remove do
 
   remove = windows_package display_name do
     action :remove
-    version version if version
   end
 
   new_resource.updated_by_last_action(actions_updated?([remove, delete]))
