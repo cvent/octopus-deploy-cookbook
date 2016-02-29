@@ -27,7 +27,7 @@ action :install do
   new_resource = @new_resource
   checksum = new_resource.checksum
   version = new_resource.version
-  enable_upgrades = new_resource.enable_upgrades
+  upgrades_enabled = new_resource.upgrades_enabled
 
   verify_version(version)
   verify_checksum(checksum)
@@ -44,7 +44,7 @@ action :install do
   install = windows_package display_name do
     action :install
     source tentacle_installer
-    version version if version && enable_upgrades
+    version version if version && upgrades_enabled
     installer_type :msi
     options '/passive /norestart'
   end
@@ -58,7 +58,7 @@ action :configure do
   instance = new_resource.instance
   checksum = new_resource.checksum
   version = new_resource.version
-  enable_upgrades = new_resource.enable_upgrades
+  upgrades_enabled = new_resource.upgrades_enabled
   home_path = new_resource.home_path
   config_path = new_resource.config_path
   app_path = new_resource.app_path
@@ -72,7 +72,7 @@ action :configure do
     action :install
     checksum checksum
     version version
-    enable_upgrades enable_upgrades
+    upgrades_enabled upgrades_enabled
   end
 
   temp_cert_file = ::File.join(Chef::Config[:file_cache_path], 'temp_config.config')
