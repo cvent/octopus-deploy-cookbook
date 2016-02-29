@@ -31,4 +31,4 @@ attribute :trusted_cert, kind_of: String
 attribute :port, kind_of: Fixnum, default: 10_933
 attribute :polling, kind_of: [TrueClass, FalseClass], default: false
 attribute :cert_file, kind_of: String, default: 'C:\tentacle_cert.txt'
-attribute :upgrade_version, kind_of: [TrueClass, FalseClass], default: true
+attribute :enable_upgrades, kind_of: [TrueClass, FalseClass], default: true
