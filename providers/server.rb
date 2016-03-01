@@ -62,6 +62,7 @@ action :remove do
 
   remove = windows_package display_name do
     action :remove
+    source 'nothing'
     version version if version
   end
 

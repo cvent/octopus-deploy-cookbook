@@ -141,6 +141,7 @@ action :remove do
 
   remove = windows_package display_name do
     action :remove
+    source 'nothing'
   end
 
   new_resource.updated_by_last_action(actions_updated?([remove, delete]))

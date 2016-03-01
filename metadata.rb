@@ -6,9 +6,9 @@ description 'Handles installing Octopus Deploy Server &| Tentacle'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 source_url 'https://github.com/cvent/octopus-deploy-cookbook'
 issues_url 'https://github.com/cvent/octopus-deploy-cookbook/issues'
-version '0.4.5'
+version '0.4.6'
 
-depends 'windows', '~> 1.38.0'
+depends 'windows', '~> 1.38'
 supports 'windows'
 
 provides 'octopus_deploy_server[OctopusServer]'
