@@ -21,7 +21,7 @@
 tentacle = node['verify-octo']['tentacle']
 
 # This section will mock out the certificate creation
-directory "C:\Octopus" do
+directory 'C:\Octopus' do
   action :create
 end
 

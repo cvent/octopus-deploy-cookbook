@@ -144,10 +144,10 @@ action :remove do
       .\\Tentacle.exe delete-instance --instance "#{instance}" --console
       #{catch_powershell_error('Deleting instance from the server')}
     EOH
-    only_if { ::Win32::Service.exists?(service_name) && ::File.exists?(::File.join(tentacle_install_location, "Tentacle.exe")) }
+    only_if { ::Win32::Service.exists?(service_name) && ::File.exist?(tentacle_install_location) }
   end
 
-  remove_config_file = file config_path  do
+  remove_config_file = file config_path do
     action :delete
   end
 
