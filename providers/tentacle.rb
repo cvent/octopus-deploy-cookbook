@@ -75,20 +75,17 @@ action :configure do
     upgrades_enabled upgrades_enabled
   end
 
-  temp_cert_file = ::File.join(Chef::Config[:file_cache_path], 'temp_config.config')
-  temp_instance = "Temp#{instance}"
+  create_home_dir = directory home_path do
+    action :create
+    recursive true
+  end
+
   generate_cert = powershell_script 'generate-tentacle-cert' do
     action :run
     cwd tentacle_install_location
     code <<-EOH
-      .\\Tentacle.exe create-instance --instance="#{temp_instance}" --config="#{temp_cert_file}" --console
-      #{catch_powershell_error('Creating temp instance to generate cert?')}
-      .\\Tentacle.exe new-certificate --instance="#{temp_instance}" -e "#{cert_file}" --console
-      #{catch_powershell_error('Generating Cert For the Machine')}
-      .\\Tentacle.exe delete-instance --instance="#{temp_instance}" --console
-      #{catch_powershell_error('Could not delete temp instance')}
-      Remove-Item "#{temp_cert_file}" -Force
-      #{catch_powershell_error('Could not delete temp config file')}
+      .\\Tentacle.exe new-certificate -e "#{cert_file}" --console
+      #{catch_powershell_error('Generating Cert for the machine')}
     EOH
     not_if { cert_file.nil? || ::File.exist?(cert_file) }
   end
@@ -107,8 +104,10 @@ action :configure do
     action :run
     cwd tentacle_install_location
     code <<-EOH
+      .\\Tentacle.exe import-certificate --instance="#{instance}" -f #{cert_file} --console
+      #{catch_powershell_error('Importing Certificate that was generated for the machine')}
       .\\Tentacle.exe new-certificate --instance="#{instance}" --if-blank --console
-      #{catch_powershell_error('Generating Certificate')}
+      #{catch_powershell_error('Generating Certificate if the Import failed')}
       .\\Tentacle.exe configure --instance="#{instance}" --reset-trust --console
       #{catch_powershell_error('Reseting Trust')}
       .\\Tentacle.exe configure --instance="#{instance}" --home="#{home_path}" --app="#{app_path}" --port="#{port}" --noListen="#{polling}" --console
@@ -127,24 +126,57 @@ action :configure do
     action [:enable, :start]
   end
 
-  new_resource.updated_by_last_action(actions_updated?([install, generate_cert, create_instance, configure, service]))
+  new_resource.updated_by_last_action(actions_updated?([install, create_home_dir, generate_cert, create_instance, configure, service]))
 end
 
 action :remove do
   new_resource = @new_resource
+  config_path = new_resource.config_path
+  instance = new_resource.instance
+  service_name = service_name(instance)
 
-  tentacle_installer = ::File.join(Chef::Config[:file_cache_path], 'octopus-tentacle.msi')
+  remove_instance = powershell_script "remove-tentacle-instance-#{instance}" do
+    action :run
+    cwd tentacle_install_location
+    code <<-EOH
+      .\\Tentacle.exe service --instance "#{instance}" --stop --uninstall --console
+      #{catch_powershell_error('Uninstalling tentacle service')}
+      .\\Tentacle.exe delete-instance --instance "#{instance}" --console
+      #{catch_powershell_error('Deleting instance from the server')}
+    EOH
+    only_if { ::Win32::Service.exists?(service_name) && ::File.exists?(::File.join(tentacle_install_location, "Tentacle.exe")) }
+  end
 
-  delete = file tentacle_installer do
+  remove_config_file = file config_path  do
     action :delete
   end
 
-  remove = windows_package display_name do
+  new_resource.updated_by_last_action(actions_updated?([remove_instance, remove_config_file]))
+end
+
+action :uninstall do
+  new_resource = @new_resource
+  name = new_resource.name
+  config_path = new_resource.config_path
+  instance = new_resource.instance
+
+  remove_instance = octopus_deploy_tentacle name do
+    action :remove
+    instance instance
+    config_path config_path
+  end
+
+  uninstall_package = windows_package display_name do
     action :remove
     source 'nothing'
   end
 
-  new_resource.updated_by_last_action(actions_updated?([remove, delete]))
+  tentacle_installer = ::File.join(Chef::Config[:file_cache_path], 'octopus-tentacle.msi')
+  delete_installer = file tentacle_installer do
+    action :delete
+  end
+
+  new_resource.updated_by_last_action(actions_updated?([remove_instance, uninstall_package, delete_installer]))
 end
 
 private

@@ -19,11 +19,11 @@
 #
 
 # Server test configuration
-default['verify-octo']['server']['version'] = '3.1.3'
-default['verify-octo']['server']['checksum'] = 'c5af09ec60d946a1c6edf564743ffc214f4ff80ff014d35805e18fa3c972da28'
+default['verify-octo']['server']['version'] = '3.2.24'
+default['verify-octo']['server']['checksum'] = 'fe82d0ebd4d0cc9baa38962d8224578154131856a3c3e63621e4834efa3006d7'
 
 # Tentacle test configuration
-default['verify-octo']['tentacle']['version'] = '3.1.3'
-default['verify-octo']['tentacle']['checksum'] = 'c5b4cd6ceec977137d93711ca0ede1dde79ae30da277d70e8d70e6d148860bec'
+default['verify-octo']['tentacle']['version'] = '3.2.24'
+default['verify-octo']['tentacle']['checksum'] = '147f84241c912da1c8fceaa6bda6c9baf980a77e55e61537880238feb3b7000a'
 default['verify-octo']['tentacle']['instance'] = 'Tentacle'
 default['verify-octo']['tentacle']['config_path'] = 'C:\\Octopus\\Tentacle.config'

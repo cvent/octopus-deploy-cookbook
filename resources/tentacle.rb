@@ -18,17 +18,17 @@
 # limitations under the License.
 #
 
-actions :install, :configure, :remove
+actions :install, :configure, :remove, :uninstall
 default_action :install
 
 attribute :instance, kind_of: String, default: 'Tentacle'
 attribute :version, kind_of: String, required: true
 attribute :checksum, kind_of: String
 attribute :home_path, kind_of: String, default: 'C:\Octopus'
-attribute :config_path, kind_of: String, default: 'C:\Octopus\Tentacle.config'
+attribute :config_path, kind_of: String, default: lazy { "#{home_path}\\#{instance}.config" }
 attribute :app_path, kind_of: String, default: 'C:\Octopus\Applications'
 attribute :trusted_cert, kind_of: String
 attribute :port, kind_of: Fixnum, default: 10_933
 attribute :polling, kind_of: [TrueClass, FalseClass], default: false
-attribute :cert_file, kind_of: String, default: 'C:\tentacle_cert.txt'
+attribute :cert_file, kind_of: String, default: lazy { "#{home_path}\\tentacle_cert.txt" }
 attribute :upgrades_enabled, kind_of: [TrueClass, FalseClass], default: true
