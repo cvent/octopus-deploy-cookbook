@@ -4,7 +4,6 @@
 # Bundler
 bin/*
 .bundle/*
-Gemfile.lock
 
 # Chef Files
 Berksfile.lock
