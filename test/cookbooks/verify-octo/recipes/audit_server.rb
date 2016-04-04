@@ -36,8 +36,8 @@ control_group 'verify-octo::server' do
       expect(service('OctopusDeploy')).to be_installed
     end
 
-    it 'should have enabled the service' do
-      expect(service('OctopusDeploy')).to be_enabled
+    it 'should have disabled the service' do
+      expect(service('OctopusDeploy')).to have_start_mode('Disabled')
     end
 
     it 'should have created the configuration file' do
