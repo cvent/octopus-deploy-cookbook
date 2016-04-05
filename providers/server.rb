@@ -60,6 +60,7 @@ action :configure do
   home_path = new_resource.home_path
   config_path = new_resource.config_path
   connection_string = new_resource.connection_string
+  master_key = new_resource.master_key
   node_name = new_resource.node_name
   admin_user = new_resource.admin_user
   license = new_resource.license
@@ -98,11 +99,12 @@ action :configure do
     #{catch_powershell_error('Configuring Cluster Node Name')}
     .\\Octopus.Server.exe configure --instance "#{instance}" --webForceSSL "False" --webListenPrefixes "http://localhost:80/" --commsListenPort "10943" --console
     #{catch_powershell_error('Configuring Listen Ports')}
-    #{".\\Octopus.Server.exe database --instance \"#{instance}\" --create --console #{catch_powershell_error('Create Database')}" if create_database}
+    #{".\\Octopus.Server.exe configure --instance \"#{instance}\" --masterkey \"#{master_key}\" --console; #{catch_powershell_error('Configuring Master Key')}" if master_key}
+    #{".\\Octopus.Server.exe database --instance \"#{instance}\" --create --console; #{catch_powershell_error('Create Database')}" if create_database}
     .\\Octopus.Server.exe service --instance "#{instance}" --stop --console
     #{catch_powershell_error('Stop Service')}
-    #{".\\Octopus.Server.exe admin --instance \"#{instance}\" --username \"#{admin_user}\" --console #{catch_powershell_error('Set administrator')}" if admin_user}
-    #{".\\Octopus.Server.exe license --instance \"#{instance}\" --licenseBase64 \"#{Base64.encode64(license)}\"--console #{catch_powershell_error('Configuring License')}" if license}
+    #{".\\Octopus.Server.exe admin --instance \"#{instance}\" --username \"#{admin_user}\" --console; #{catch_powershell_error('Set administrator')}" if admin_user}
+    #{".\\Octopus.Server.exe license --instance \"#{instance}\" --licenseBase64 \"#{Base64.encode64(license)}\" --console; #{catch_powershell_error('Configuring License')}" if license}
     .\\Octopus.Server.exe service --instance "#{instance}" --install --reconfigure --console
     #{catch_powershell_error('Create Service')}
     EOH

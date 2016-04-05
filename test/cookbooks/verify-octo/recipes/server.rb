@@ -31,6 +31,7 @@ octopus_deploy_server 'OctopusServer' do
   node_name 'octo-web-01'
   connection_string 'Data Source=localhostdba;Initial Catalog=octo;Integrated Security=False;User ID=octo;Password=password'
   start_service false
+  master_key node['verify-octo']['server']['master-key']
 end
 
 include_recipe 'verify-octo::audit_server'
