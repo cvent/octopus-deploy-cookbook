@@ -20,7 +20,7 @@
 
 install_version = "#{node['verify-octo']['server']['version']}.0"
 master_key = node['verify-octo']['server']['master-key']
-master_key_file = "C:\\verify-masterkey.txt"
+master_key_file = 'C:\\verify-masterkey.txt'
 
 # Such a hack but we shoudl validate the master key gets set and this is the only way
 powershell_script 'validate-master-key' do
