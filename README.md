@@ -14,12 +14,22 @@ This is pre release and there will be major changes to this before its final rel
 ### octopus_deploy_server
 #### Actions
 - :install: Install a version of Octopus Deploy server
-- :remove: Uninstall a version of the Octopus Deploy server if it is installed
+- :configure: Install a version of Octopus Deploy server and configure it
+- :remove: Uninstall a version of the Octopus Deploy Server if it is installed
 
 #### Attribute Parameters
 - :instance: Name attribute. The Octopus Deploy Server instance name (used for configuring the instance not install)
 - :version: Required. The version of Octopus Deploy Server to install
 - :checksum: The SHA256 checksum of the Octopus Deploy Server msi file to verify download
+- :home_path: The Octopus Deploy Server home directory (Defaults to C:\Octopus)
+- :config_path: The Octopus Deploy Server config file path (Defaults to C:\Octopus\OctopusServer.config)
+- :connection_string: The Octopus Deploy Server connection string to the MSSQL Server instance
+- :master_key: The Octopus Deploy Server master key for encruption, leave blank to generate one at creation
+- :node_name: The Octopus Deploy Server Node Name, will default to machine hostname
+- :create_database: Whether Octopus Deploy Server should create the database with the connection string provided (Defaults to false)
+- :admin_user: A default admin in AD for the Octopus Deploy Server to create
+- :license: The raw license key for Octopus Deploy Server to use
+- :start_service: Whether to start the Octopus Deploy Server service after creation of the instance (Defaults to True)
 
 #### Example
 Install version 3.1.1 of Octopus Deploy Server
