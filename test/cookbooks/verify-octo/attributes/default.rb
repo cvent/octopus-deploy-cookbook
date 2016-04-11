@@ -21,6 +21,7 @@
 # Server test configuration
 default['verify-octo']['server']['version'] = '3.2.24'
 default['verify-octo']['server']['checksum'] = 'fe82d0ebd4d0cc9baa38962d8224578154131856a3c3e63621e4834efa3006d7'
+default['verify-octo']['server']['master-key'] = 'wJ+qLI8AjSvtdtIt05eW7w=='
 
 # Tentacle test configuration
 default['verify-octo']['tentacle']['version'] = '3.2.24'
