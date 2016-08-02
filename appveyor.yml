@@ -5,13 +5,19 @@ branches:
 cache:
   - '%TEMP%\verifier\gems'
 
+init:
+  - ps: $PSVersionTable
+
 install:
   - ps: . { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install -channel current -project chefdk
   - SET PATH=C:\opscode\chefdk\bin;%PATH%
 
-build_script:
+before_build:
   - chef exec bundle install
   - copy .kitchen.appveyor.yml .kitchen.local.yml
 
+build_script:
+  - chef exec kitchen converge
+
 test_script:
-  - chef exec kitchen test
+  - chef exec inspec exec test/integration/**/*.rb

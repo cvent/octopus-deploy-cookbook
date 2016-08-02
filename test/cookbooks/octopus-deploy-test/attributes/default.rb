@@ -1,6 +1,6 @@
 #
 # Author:: Brent Montague (<bmontague@cvent.com>)
-# Cookbook Name:: verify-octo
+# Cookbook Name:: octopus-deploy-test
 # Attribute:: default
 #
 # Copyright:: Copyright (c) 2015 Cvent, Inc.
@@ -19,12 +19,12 @@
 #
 
 # Server test configuration
-default['verify-octo']['server']['version'] = '3.2.24'
-default['verify-octo']['server']['checksum'] = 'fe82d0ebd4d0cc9baa38962d8224578154131856a3c3e63621e4834efa3006d7'
-default['verify-octo']['server']['master-key'] = 'wJ+qLI8AjSvtdtIt05eW7w=='
+default['octopus-deploy-test']['server']['version'] = '3.2.24'
+default['octopus-deploy-test']['server']['checksum'] = 'fe82d0ebd4d0cc9baa38962d8224578154131856a3c3e63621e4834efa3006d7'
+default['octopus-deploy-test']['server']['master-key'] = 'wJ+qLI8AjSvtdtIt05eW7w=='
 
 # Tentacle test configuration
-default['verify-octo']['tentacle']['version'] = '3.2.24'
-default['verify-octo']['tentacle']['checksum'] = '147f84241c912da1c8fceaa6bda6c9baf980a77e55e61537880238feb3b7000a'
-default['verify-octo']['tentacle']['instance'] = 'Tentacle'
-default['verify-octo']['tentacle']['config_path'] = 'C:\\Octopus\\Tentacle.config'
+default['octopus-deploy-test']['tentacle']['version'] = '3.2.24'
+default['octopus-deploy-test']['tentacle']['checksum'] = '147f84241c912da1c8fceaa6bda6c9baf980a77e55e61537880238feb3b7000a'
+default['octopus-deploy-test']['tentacle']['instance'] = 'Tentacle'
+default['octopus-deploy-test']['tentacle']['config_path'] = 'C:\\Octopus\\Tentacle.config'
