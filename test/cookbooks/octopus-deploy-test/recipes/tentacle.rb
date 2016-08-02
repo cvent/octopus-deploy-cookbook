@@ -1,6 +1,6 @@
 #
 # Author:: Brent Montague (<bmontague@cvent.com>)
-# Cookbook Name:: verify-octo
+# Cookbook Name:: octopus-deploy-test
 # Recipe:: tentacle
 #
 # Copyright:: Copyright (c) 2015 Cvent, Inc.
@@ -18,7 +18,7 @@
 # limitations under the License.
 #
 
-tentacle = node['verify-octo']['tentacle']
+tentacle = node['octopus-deploy-test']['tentacle']
 
 # This section will mock out the certificate creation
 directory 'C:\Octopus' do
@@ -49,5 +49,3 @@ octopus_deploy_tentacle 'Tentacle' do
   checksum tentacle['checksum']
   trusted_cert '324JKSJKLSJ324DSFDF3423FDSF8783FDSFSDFS0'
 end
-
-include_recipe 'verify-octo::audit_tentacle'

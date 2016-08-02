@@ -1,4 +1,5 @@
 require 'stove/rake_task'
+require 'cookstyle'
 require 'rubocop/rake_task'
 require 'foodcritic'
 

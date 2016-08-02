@@ -1,4 +1,2 @@
-inherit_from:
-- https://raw.githubusercontent.com/cvent/rubocop-rules-chef/master/rubocop.yml
 Metrics/LineLength:
   Max: 160

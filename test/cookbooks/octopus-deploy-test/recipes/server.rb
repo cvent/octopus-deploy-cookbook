@@ -1,6 +1,6 @@
 #
 # Author:: Brent Montague (<bmontague@cvent.com>)
-# Cookbook Name:: verify-octo
+# Cookbook Name:: octopus-deploy-test
 # Recipe:: server
 #
 # Copyright:: Copyright (c) 2015 Cvent, Inc.
@@ -21,17 +21,15 @@
 # Just make sure its not installed already
 octopus_deploy_server 'OctopusServer' do
   action :remove
-  version node['verify-octo']['server']['version']
+  version node['octopus-deploy-test']['server']['version']
 end
 
 octopus_deploy_server 'OctopusServer' do
   action :configure
-  version node['verify-octo']['server']['version']
-  checksum node['verify-octo']['server']['checksum']
+  version node['octopus-deploy-test']['server']['version']
+  checksum node['octopus-deploy-test']['server']['checksum']
   node_name 'octo-web-01'
   connection_string 'Data Source=localhostdba;Initial Catalog=octo;Integrated Security=False;User ID=octo;Password=password'
   start_service false
-  master_key node['verify-octo']['server']['master-key']
+  master_key node['octopus-deploy-test']['server']['master-key']
 end
-
-include_recipe 'verify-octo::audit_server'
