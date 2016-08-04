@@ -40,5 +40,17 @@ module OctopusDeploy
     def installer_url(version)
       "https://download.octopusdeploy.com/octopus/Octopus.Tentacle.#{version}-x64.msi"
     end
+
+    def resolve_port(polling, port)
+      port || default_port(polling)
+    end
+
+    def default_port(polling)
+      if polling
+        10_943
+      else
+        10_933
+      end
+    end
   end
 end

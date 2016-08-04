@@ -36,5 +36,4 @@ default['octopus']['tentacle']['instance']['home_path'] = 'C:\Octopus'
 default['octopus']['tentacle']['instance']['config_file'] = 'C:\Octopus\Tentacle\Tentacle.config'
 default['octopus']['tentacle']['instance']['app_path'] = 'C:\WebApps'
 default['octopus']['tentacle']['instance']['trusted_cert'] = ''
-default['octopus']['tentacle']['instance']['listen_port'] = '10933'
-default['octopus']['tentacle']['instance']['polling'] = 'False'
+default['octopus']['tentacle']['instance']['polling'] = false
