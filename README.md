@@ -24,7 +24,7 @@ This is pre release and there will be major changes to this before its final rel
 - :home_path: The Octopus Deploy Server home directory (Defaults to C:\Octopus)
 - :config_path: The Octopus Deploy Server config file path (Defaults to C:\Octopus\OctopusServer.config)
 - :connection_string: The Octopus Deploy Server connection string to the MSSQL Server instance
-- :master_key: The Octopus Deploy Server master key for encruption, leave blank to generate one at creation
+- :master_key: The Octopus Deploy Server master key for encryption, leave blank to generate one at creation
 - :node_name: The Octopus Deploy Server Node Name, will default to machine hostname
 - :create_database: Whether Octopus Deploy Server should create the database with the connection string provided (Defaults to false)
 - :admin_user: A default admin in AD for the Octopus Deploy Server to create
@@ -47,6 +47,7 @@ end
 #### Actions
 - :install: Install a version of Octopus Deploy Tentacle (Default)
 - :configure: Configure an instance of the octopus Deploy tentacle
+- :register: Register Tentacle with Octopus Deploy Server
 - :remove: Remove an instance of the Octopus Deploy Tentacle
 - :uninstall: Uninstall a version of the Octopus Deploy Tentacle if it is installed
 
@@ -62,6 +63,10 @@ end
 - :polling: Whether this Octopus Deploy Instance is a polling tentacle (Defaults to False)
 - :cert_file: Where to export the Octopus Deploy Instance cert (Defaults to C:\Octopus\tentacle_cert.txt)
 - :upgrades_enabled: Whether to upgrade or downgrade the tentacle version if the windows installer version does not match what is provided in the resource. (Defaults to True)
+- :server: Url to Octopus Deploy Server (e.g https://octopus.example.com)
+- :api_key: Api Key used to register Tentacle to Octopus Server
+- :roles: Array of roles to apply to Tentacle when registering with Octopus Deploy Server (e.g ["web-server","app-server"]) 
+- :environment: Which environment the Tentacle will become part of when registering with Octopus Deploy Server
 
 #### Example
 Install version 3.2.24 of Octopus Deploy Tentacle
@@ -75,6 +80,35 @@ end
 
 ```
 
+```ruby
+Register Listening Tentacle
+# You will first need to generate an api key
+# In Octopus Deploy Server GUI click your Name -> Profile -> API keys
+octopus_deploy_tentacle 'Tentacle' do
+  action :register
+  server 'https://octopus.example.com'
+  api_key '12345678910'
+  roles ['database']
+  environment 'prod'
+end
+```
+
+```ruby
+Register Polling Tentacle
+# You will first need to generate an api key
+# In Octopus Deploy Server GUI click your Name -> Profile -> API keys
+octopus_deploy_tentacle 'Tentacle' do
+  action :register
+  server 'https://octopus.example.com'
+  api_key '12345678910'
+  roles ['web-default']
+  environment 'dev'
+  polling true
+end
+```
+
+
+
 
 ## Assumptions
 
@@ -84,6 +118,11 @@ One major assumption of this cookbook is that you already have .net40 installed 
 ## Known Issues
 This does not work with Octopus Deploy versions less than 3.2.3 because of a bug in [exporting tentacle certificates](https://github.com/OctopusDeploy/Issues/issues/2143)
 
+Tentacle roles are only used the first time a Tentacle is registered with an Octopus Deploy Server. Updating tentacle roles in cookbook will not update roles on Octopus Deploy Server.
+
+Registering multiple tentacles on the same machine is not supported.
+
+Switching Tentacle modes between 'polling' & 'listening' is not currently supported.
 
 License and Author
 ==================
