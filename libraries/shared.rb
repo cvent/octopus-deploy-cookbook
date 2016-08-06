@@ -21,7 +21,7 @@
 module OctopusDeploy
   # A container to hold the shared logic instead of attributes
   module Shared
-    def fancy_bool(bool)
+    def powershell_boolean(bool)
       bool.to_s.capitalize
     end
 
