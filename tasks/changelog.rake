@@ -8,7 +8,7 @@ begin
   GitHubChangelogGenerator::RakeTask.new :changelog do |config|
     config.since_tag = 'v0.4.5'
     config.future_release = "v#{metadata.version}"
-    config.add_issues_wo_labels = false
+    config.issues = false
     config.add_pr_wo_labels = false
     config.enhancement_labels = %w(enhancement)
     config.bug_labels = %w(bug)
