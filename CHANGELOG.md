@@ -1,21 +1,21 @@
 # Change Log
 
-## [v0.5.2](https://github.com/cvent/octopus-deploy-cookbook/tree/v0.5.2) (2016-08-05)
-[Full Changelog](https://github.com/cvent/octopus-deploy-cookbook/compare/v0.5.1...v0.5.2)
+## [v0.6.0](https://github.com/cvent/octopus-deploy-cookbook/tree/v0.6.0) (2016-08-08)
+[Full Changelog](https://github.com/cvent/octopus-deploy-cookbook/compare/v0.5.1...v0.6.0)
 
-**Implemented enhancements:**
+**Merged pull requests:**
 
-- Add Documentation for server resource [\#24](https://github.com/cvent/octopus-deploy-cookbook/issues/24)
-- Server configure should be allowed to specify the master key [\#23](https://github.com/cvent/octopus-deploy-cookbook/issues/23)
+- Set tentacle register environment default to be the chef environment [\#45](https://github.com/cvent/octopus-deploy-cookbook/pull/45) ([spuder](https://github.com/spuder))
+- Add ability for the tentacle resource to setup firewall rule for listening tentacles [\#43](https://github.com/cvent/octopus-deploy-cookbook/pull/43) ([spuder](https://github.com/spuder))
+- Add changelog generator and first changelog file [\#39](https://github.com/cvent/octopus-deploy-cookbook/pull/39) ([brentm5](https://github.com/brentm5))
 - Add ability to register tentacle with server through tentacle resource  [\#33](https://github.com/cvent/octopus-deploy-cookbook/pull/33) ([spuder](https://github.com/spuder))
 - Include optional master key attribute for configuring a server instance [\#25](https://github.com/cvent/octopus-deploy-cookbook/pull/25) ([brentm5](https://github.com/brentm5))
 
 ## [v0.5.1](https://github.com/cvent/octopus-deploy-cookbook/tree/v0.5.1) (2016-04-04)
 [Full Changelog](https://github.com/cvent/octopus-deploy-cookbook/compare/v0.5.0...v0.5.1)
 
-**Fixed bugs:**
+**Merged pull requests:**
 
-- Issue in service resource install with start\_service set to false [\#21](https://github.com/cvent/octopus-deploy-cookbook/issues/21)
 - Fix issue with notifying service to restart when its disabled! [\#22](https://github.com/cvent/octopus-deploy-cookbook/pull/22) ([brentm5](https://github.com/brentm5))
 
 ## [v0.5.0](https://github.com/cvent/octopus-deploy-cookbook/tree/v0.5.0) (2016-04-01)
@@ -24,38 +24,31 @@
 ## [v0.4.8](https://github.com/cvent/octopus-deploy-cookbook/tree/v0.4.8) (2016-03-09)
 [Full Changelog](https://github.com/cvent/octopus-deploy-cookbook/compare/v0.4.7...v0.4.8)
 
-**Fixed bugs:**
+**Merged pull requests:**
 
-- Fix an issue with chef resource on older versions of chef-client [\#17](https://github.com/cvent/octopus-deploy-cookbook/issues/17)
 - Remove lazy loaded values to fix chef-clients \< 12.5 [\#18](https://github.com/cvent/octopus-deploy-cookbook/pull/18) ([brentm5](https://github.com/brentm5))
 
 ## [v0.4.7](https://github.com/cvent/octopus-deploy-cookbook/tree/v0.4.7) (2016-03-09)
 [Full Changelog](https://github.com/cvent/octopus-deploy-cookbook/compare/v0.4.6...v0.4.7)
 
-**Implemented enhancements:**
+**Merged pull requests:**
 
 - Cleanup tentacle resources and change remove functionality [\#14](https://github.com/cvent/octopus-deploy-cookbook/pull/14) ([brentm5](https://github.com/brentm5))
 
 ## [v0.4.6](https://github.com/cvent/octopus-deploy-cookbook/tree/v0.4.6) (2016-03-01)
 [Full Changelog](https://github.com/cvent/octopus-deploy-cookbook/compare/v0.4.5...v0.4.6)
 
-**Implemented enhancements:**
-
-- Add configure action to Octopus Deploy server resource [\#19](https://github.com/cvent/octopus-deploy-cookbook/pull/19) ([brentm5](https://github.com/brentm5))
-- Setup configure action on tentacle :boom: :metal: [\#4](https://github.com/cvent/octopus-deploy-cookbook/pull/4) ([brentm5](https://github.com/brentm5))
-
-**Fixed bugs:**
-
-- Make sure that the services is restarted if we configure or reconfigure the tentacle [\#5](https://github.com/cvent/octopus-deploy-cookbook/pull/5) ([brentm5](https://github.com/brentm5))
-
 **Merged pull requests:**
 
+- Add configure action to Octopus Deploy server resource [\#19](https://github.com/cvent/octopus-deploy-cookbook/pull/19) ([brentm5](https://github.com/brentm5))
 - Update windows version to be a little less strict and fix uninstall action [\#13](https://github.com/cvent/octopus-deploy-cookbook/pull/13) ([brentm5](https://github.com/brentm5))
 - Allow an option so chef does not downgrade tentacle versions [\#12](https://github.com/cvent/octopus-deploy-cookbook/pull/12) ([brentm5](https://github.com/brentm5))
 - Update tentacle resource and bump patch version [\#9](https://github.com/cvent/octopus-deploy-cookbook/pull/9) ([brentm5](https://github.com/brentm5))
 - Add appveyor for builds so that we can test converges [\#8](https://github.com/cvent/octopus-deploy-cookbook/pull/8) ([brentm5](https://github.com/brentm5))
 - Generate a machine level certificate file that could be used later [\#7](https://github.com/cvent/octopus-deploy-cookbook/pull/7) ([brentm5](https://github.com/brentm5))
 - Generate a machine level certificate file that could be used later [\#6](https://github.com/cvent/octopus-deploy-cookbook/pull/6) ([brentm5](https://github.com/brentm5))
+- Make sure that the services is restarted if we configure or reconfigure the tentacle [\#5](https://github.com/cvent/octopus-deploy-cookbook/pull/5) ([brentm5](https://github.com/brentm5))
+- Setup configure action on tentacle :boom: :metal: [\#4](https://github.com/cvent/octopus-deploy-cookbook/pull/4) ([brentm5](https://github.com/brentm5))
 - Upgrade the octopus deploy cookbook to use custom resources [\#2](https://github.com/cvent/octopus-deploy-cookbook/pull/2) ([brentm5](https://github.com/brentm5))
 - Add travis and fix some issues with code that tests uncovered [\#1](https://github.com/cvent/octopus-deploy-cookbook/pull/1) ([brentm5](https://github.com/brentm5))
 

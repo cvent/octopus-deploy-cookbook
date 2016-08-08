@@ -53,6 +53,26 @@ test/*
 features/*
 Guardfile
 Procfile
+.travis.yml
+appveyor.yml
+.codeclimate.yml
+.kitchen.yml
+.kitchen.appveyor.yml
+.rubocop.yml
+.rubocop_todo.yml
+.kitchen/*
+
+# Tasks #
+#########
+Rakfile
+tasks/*
+
+# bundler #
+###########
+.bundle/
+Gemfile
+Gemfile.lock
+.ruby-version
 
 # SCM #
 #######
@@ -89,7 +109,3 @@ Strainerfile
 ###########
 .vagrant
 Vagrantfile
-
-# Travis #
-##########
-.travis.yml
