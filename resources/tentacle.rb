@@ -36,4 +36,4 @@ attribute :upgrades_enabled, kind_of: [TrueClass, FalseClass], default: true
 attribute :server, kind_of: String
 attribute :api_key, kind_of: String
 attribute :roles, kind_of: Array
-attribute :environment, kind_of: String
+attribute :environment, kind_of: String, default: node.chef_environment

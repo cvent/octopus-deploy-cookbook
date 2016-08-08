@@ -66,7 +66,7 @@ end
 - :server: Url to Octopus Deploy Server (e.g https://octopus.example.com)
 - :api_key: Api Key used to register Tentacle to Octopus Server
 - :roles: Array of roles to apply to Tentacle when registering with Octopus Deploy Server (e.g ["web-server","app-server"]) 
-- :environment: Which environment the Tentacle will become part of when registering with Octopus Deploy Server
+- :environment: Which environment the Tentacle will become part of when registering with Octopus Deploy Server (Defaults to node.chef_environment )
 
 #### Example
 Install version 3.2.24 of Octopus Deploy Tentacle
@@ -89,7 +89,6 @@ octopus_deploy_tentacle 'Tentacle' do
   server 'https://octopus.example.com'
   api_key '12345678910'
   roles ['database']
-  environment 'prod'
   configure_firewall true
 end
 ```
@@ -104,7 +103,6 @@ octopus_deploy_tentacle 'Tentacle' do
   api_key '12345678910'
   roles ['web-default']
   polling true
-  environment 'dev'
 end
 ```
 
