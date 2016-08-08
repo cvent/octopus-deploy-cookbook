@@ -65,8 +65,19 @@ action :configure do
   trusted_cert = new_resource.trusted_cert
   polling = new_resource.polling
   port = resolve_port(polling, new_resource.port)
+  configure_firewall = new_resource.configure_firewall
   service_name = service_name(instance)
   cert_file =  new_resource.cert_file
+
+  firewall = windows_firewall_rule 'Octopus Deploy Tentacle' do
+    action :create
+    localport port.to_s
+    dir :in
+    protocol 'TCP'
+    firewall_action :allow
+    only_if { configure_firewall }
+    not_if { polling }
+  end
 
   install = octopus_deploy_tentacle name do
     action :install
@@ -126,7 +137,7 @@ action :configure do
     action [:enable, :start]
   end
 
-  new_resource.updated_by_last_action(actions_updated?([install, create_home_dir, generate_cert, create_instance, configure, service]))
+  new_resource.updated_by_last_action(actions_updated?([firewall, install, create_home_dir, generate_cert, create_instance, configure, service]))
 end
 
 action :register do

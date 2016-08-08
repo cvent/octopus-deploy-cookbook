@@ -9,7 +9,6 @@ This cookbook is used for installing the [Octopus Deploy](http://octopusdeploy.c
 ## NOTICE: Pre-Release
 This is pre release and there will be major changes to this before its final release.  The recipes for installation and configuration will be switched into resources so people can use the library easier. Once this is found stable it will be released as version 1.0.0, until this point lock down to any minor version that you use.
 
-
 ## Resource/Provider
 ### octopus_deploy_server
 #### Actions
@@ -60,6 +59,7 @@ end
 - :app_path: The Octopus Deploy Instance application directory (Defaults to C:\Octopus\Applications)
 - :trusted_cert: The Octopus Deploy Instance trusted Server cert
 - :port: The Octopus Deploy Instance port to listen on for listening tentacle (Defaults to 10933)
+- :configure_firewall: Whether cookbook will open firewall on listen tentacles (Defaults to false)
 - :polling: Whether this Octopus Deploy Instance is a polling tentacle (Defaults to False)
 - :cert_file: Where to export the Octopus Deploy Instance cert (Defaults to C:\Octopus\tentacle_cert.txt)
 - :upgrades_enabled: Whether to upgrade or downgrade the tentacle version if the windows installer version does not match what is provided in the resource. (Defaults to True)
@@ -90,6 +90,7 @@ octopus_deploy_tentacle 'Tentacle' do
   api_key '12345678910'
   roles ['database']
   environment 'prod'
+  configure_firewall true
 end
 ```
 
@@ -102,13 +103,10 @@ octopus_deploy_tentacle 'Tentacle' do
   server 'https://octopus.example.com'
   api_key '12345678910'
   roles ['web-default']
-  environment 'dev'
   polling true
+  environment 'dev'
 end
 ```
-
-
-
 
 ## Assumptions
 
