@@ -25,6 +25,17 @@ module OctopusDeploy
       bool.to_s.capitalize
     end
 
+    # Iterate over every option and make a big long string like:
+    # --role "web" --role "database" --role "app-server"
+    def option_list(name, options)
+      options.map { |option| "--#{name} \"#{option}\"" }.join(' ')
+    end
+
+    def api_client(server, api_key)
+      options = { headers: { 'X-Octopus-ApiKey' => api_key } }
+      Chef::HTTP.new("#{server}/api", options)
+    end
+
     def actions_updated?(actions)
       actions.any?(&:updated_by_last_action?)
     end

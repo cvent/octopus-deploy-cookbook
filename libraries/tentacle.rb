@@ -21,6 +21,8 @@
 module OctopusDeploy
   # A container to hold the tentacle values instead of attributes
   module Tentacle
+    include OctopusDeploy::Shared
+
     def display_name
       'Octopus Deploy Tentacle'
     end
@@ -41,8 +43,29 @@ module OctopusDeploy
       "https://download.octopusdeploy.com/octopus/Octopus.Tentacle.#{version}-x64.msi"
     end
 
-    def resolve_port(polling, port)
+    def tentacle_exists?(server, api_key, thumbprint)
+      ::JSON.parse(api_client(server, api_key).get("/machines/all?thumbprint=#{thumbprint}")).any? do |machine|
+        machine['Thumbprint'] == thumbprint
+      end
+    end
+
+    def tentacle_thumbprint(config)
+      return unless ::File.exist?(config)
+
+      matcher = ::File.read(config).match(/Tentacle\.CertificateThumbprint">(.*)</)
+      return matcher[1].upcase if matcher
+    end
+
+    def resolve_port(polling, port = nil)
       port || default_port(polling)
+    end
+
+    def register_comm_config(polling, port = nil)
+      if polling
+        "--comms-style \"TentacleActive\" --server-comms-port \"#{port}\" --force"
+      else
+        '--comms-style "TentaclePassive"'
+      end
     end
 
     def default_port(polling)
