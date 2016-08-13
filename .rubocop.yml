@@ -3,6 +3,6 @@ AllCops:
   Exclude:
     - Gemfile
     - Rakefile
-
+    - 'vendor/**/*'
 Metrics/LineLength:
   Max: 160
