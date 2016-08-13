@@ -1,7 +1,3 @@
-# Put files/directories that should be ignored in this file when uploading
-# or sharing to the community site.
-# Lines that start with '# ' are comments.
-
 # OS generated files #
 ######################
 .DS_Store
@@ -87,6 +83,10 @@ Gemfile.lock
 */.hg/*
 */.svn/*
 
+# github #
+#######
+.github/
+
 # Berkshelf #
 #############
 Berksfile
@@ -97,13 +97,6 @@ tmp
 # Cookbooks #
 #############
 CONTRIBUTING
-
-# Strainer #
-############
-Colanderfile
-Strainerfile
-.colander
-.strainer
 
 # Vagrant #
 ###########
