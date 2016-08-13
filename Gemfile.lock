@@ -217,6 +217,7 @@ DEPENDENCIES
   github_changelog_generator
   kitchen-localhost
   rake (< 11)
+  rspec
   stove
 
 BUNDLED WITH

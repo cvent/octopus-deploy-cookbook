@@ -7,6 +7,7 @@ group :development do
   gem 'rake', '< 11'
   gem 'foodcritic', '~> 4.0'
   gem 'cookstyle'
+  gem 'rspec'
 end
 
 group :appveyor do
