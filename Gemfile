@@ -7,6 +7,8 @@ group :development do
   gem 'rake', '< 11'
   gem 'foodcritic', '~> 4.0'
   gem 'cookstyle'
+  gem 'kitchen-vagrant'
+  gem 'kitchen-inspec'
   gem 'rspec'
 end
 

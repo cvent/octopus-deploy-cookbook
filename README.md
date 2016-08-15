@@ -39,7 +39,6 @@ octopus_deploy_server 'OctopusServer' do
   version '3.1.1'
   checksum '<SHA256-checksum>'
 end
-
 ```
 
 ### octopus_deploy_tentacle
@@ -68,8 +67,12 @@ end
 - :roles: Array of roles to apply to Tentacle when registering with Octopus Deploy Server (e.g ["web-server","app-server"]) 
 - :environment: Which environment the Tentacle will become part of when registering with Octopus Deploy Server (Defaults to node.chef_environment )
 
-#### Example
-Install version 3.2.24 of Octopus Deploy Tentacle
+
+#### Examples
+
+##### Install version 3.2.24 of Octopus Deploy Tentacle
+
+This will simply install the version of the tentacle that is specified.
 
 ```ruby
 octopus_deploy_tentacle 'Tentacle' do
@@ -77,11 +80,28 @@ octopus_deploy_tentacle 'Tentacle' do
   version '3.2.24'
   checksum '147f84241c912da1c8fceaa6bda6c9baf980a77e55e61537880238feb3b7000a'
 end
-
 ```
 
+##### Install version 3.2.24 of Octopus Deploy Tentacle and configure it
+
+This will install the tentacle and then configure the tentacle on the machine to communicate with the Octopus Deploy server.  It can also update firewall rules if enabled.
+
 ```ruby
-Register Listening Tentacle
+octopus_deploy_tentacle 'Tentacle' do
+  action [:install, :configure]
+  version '3.2.24'
+  checksum '147f84241c912da1c8fceaa6bda6c9baf980a77e55e61537880238feb3b7000a'
+  trusted_cert 'b5b7ea6537852fb5b7ea6537852f3428'
+  # You can enable this resource to update firewall rules as well
+  configure_firewall true
+end
+```
+
+##### Register Listening Tentacle with the Octopus Deploy Server
+
+This will check if the tentacle is registered on the Octopus Deploy server and if it is not will register the tentacle in the environment with the tags that are specified.
+
+```ruby
 # You will first need to generate an api key
 # In Octopus Deploy Server GUI click your Name -> Profile -> API keys
 octopus_deploy_tentacle 'Tentacle' do
@@ -89,22 +109,11 @@ octopus_deploy_tentacle 'Tentacle' do
   server 'https://octopus.example.com'
   api_key '12345678910'
   roles ['database']
-  configure_firewall true
+  # You can set polling to true for a polling tentacle setup
+  # polling true
 end
 ```
 
-```ruby
-Register Polling Tentacle
-# You will first need to generate an api key
-# In Octopus Deploy Server GUI click your Name -> Profile -> API keys
-octopus_deploy_tentacle 'Tentacle' do
-  action :register
-  server 'https://octopus.example.com'
-  api_key '12345678910'
-  roles ['web-default']
-  polling true
-end
-```
 
 ## Assumptions
 
@@ -119,6 +128,7 @@ Tentacle roles are only used the first time a Tentacle is registered with an Oct
 Registering multiple tentacles on the same machine is not supported.
 
 Switching Tentacle modes between 'polling' & 'listening' is not currently supported.
+
 
 License and Author
 ==================

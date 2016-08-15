@@ -18,7 +18,6 @@
 # limitations under the License.
 #
 
-include OctopusDeploy::Shared
 include OctopusDeploy::Tentacle
 
 use_inline_resources
@@ -149,60 +148,26 @@ action :register do
   api_key = new_resource.api_key
   roles = new_resource.roles
   environment = new_resource.environment
+  config_path = new_resource.config_path
 
   verify_server(server)
   verify_api_key(api_key)
   verify_roles(roles)
   verify_environment(environment)
 
-  # Itterate over every role and make a big long string like:
-  # --role "web" --role "database" --role "app-server"
-  role_expression = ''
-  roles.each do |a_role|
-    role_expression << "--role \"#{a_role}\" "
+  register_instance = powershell_script "register-#{instance}-tentacle" do
+    action :run
+    cwd tentacle_install_location
+    code <<-EOH
+      .\\Tentacle.exe register-with --instance "#{instance}" --server "#{server}" --name "#{node.name}" --apiKey "#{api_key}" #{register_comm_config(polling, port)} --environment "#{environment}" #{option_list('role', roles)} --console
+      #{catch_powershell_error('Registering Tentacle')}
+    EOH
+    # This is sort of a hack, you need to specify the config_path on register if it is not default
+    # The other option is to read the registry key but the helpers are not available in 12.4.1
+    not_if { tentacle_exists?(server, api_key, tentacle_thumbprint(config_path)) }
   end
 
-  if polling
-    register_polling_instance = powershell_script "register-polling-tentacle-instance-#{instance}" do
-      action :run
-      cwd tentacle_install_location
-      code <<-EOH
-        .\\Tentacle.exe register-with --instance "#{instance}" --server "#{server}" --name "#{node.name}" --apiKey "#{api_key}" --comms-style "TentacleActive" --server-comms-port "#{port}" --force --environment "#{environment}" #{role_expression} --console
-        #{catch_powershell_error('Registering Tentacle')}
-      EOH
-      only_if <<-EOH
-        Add-Type -Path '.\\Newtonsoft.Json.dll'
-        Add-Type -Path '.\\Octopus.Client.dll'
-        $endpoint = new-object Octopus.Client.OctopusServerEndpoint '#{server}', '#{api_key}'
-        $repository = new-object Octopus.Client.OctopusRepository $endpoint
-        $tentacle = New-Object Octopus.Client.Model.MachineResource
-        $thumbprint = (& '.\\Tentacle.exe' show-thumbprint --nologo --console)
-        $thumbprint = $thumbprint -replace '.*([A-Z0-9]{40}).*', '$1'
-        [string]::IsNullOrEmpty($thumbprint) -OR $repository.Machines.FindByThumbprint($thumbprint).Thumbprint -ne $thumbprint
-      EOH
-    end
-    new_resource.updated_by_last_action(actions_updated?([register_polling_instance]))
-  else
-    register_listening_instance = powershell_script "register-listening-tentacle-instance-#{instance}" do
-      action :run
-      cwd tentacle_install_location
-      code <<-EOH
-        .\\Tentacle.exe register-with --instance "#{instance}" --server "#{server}" --name "#{node.name}" --apiKey="#{api_key}" #{role_expression} --environment "#{environment}" --comms-style TentaclePassive --console
-        #{catch_powershell_error('Registering Tentacle')}
-      EOH
-      only_if <<-EOH
-        Add-Type -Path '.\\Newtonsoft.Json.dll'
-        Add-Type -Path '.\\Octopus.Client.dll'
-        $endpoint = new-object Octopus.Client.OctopusServerEndpoint '#{server}', '#{api_key}'
-        $repository = new-object Octopus.Client.OctopusRepository $endpoint
-        $tentacle = New-Object Octopus.Client.Model.MachineResource
-        $thumbprint = (& '.\\Tentacle.exe' show-thumbprint --nologo --console)
-        $thumbprint = $thumbprint -replace '.*([A-Z0-9]{40}).*', '$1'
-        [string]::IsNullOrEmpty($thumbprint) -OR $repository.Machines.FindByThumbprint($thumbprint).Thumbprint -ne $thumbprint
-      EOH
-    end
-    new_resource.updated_by_last_action(actions_updated?([register_listening_instance]))
-  end
+  new_resource.updated_by_last_action(actions_updated?([register_instance]))
 end
 
 action :remove do
