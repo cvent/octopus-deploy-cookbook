@@ -1,5 +1,13 @@
 # Change Log
 
+## [v0.6.1](https://github.com/cvent/octopus-deploy-cookbook/tree/v0.6.1) (2016-08-15)
+[Full Changelog](https://github.com/cvent/octopus-deploy-cookbook/compare/v0.6.0...v0.6.1)
+
+**Merged pull requests:**
+
+- Add unit test to validate library assumptions [\#49](https://github.com/cvent/octopus-deploy-cookbook/pull/49) ([brentm5](https://github.com/brentm5))
+- Refactor registering tentacle resource [\#47](https://github.com/cvent/octopus-deploy-cookbook/pull/47) ([brentm5](https://github.com/brentm5))
+
 ## [v0.6.0](https://github.com/cvent/octopus-deploy-cookbook/tree/v0.6.0) (2016-08-08)
 [Full Changelog](https://github.com/cvent/octopus-deploy-cookbook/compare/v0.5.1...v0.6.0)
 
