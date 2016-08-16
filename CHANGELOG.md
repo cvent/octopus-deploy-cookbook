@@ -1,5 +1,12 @@
 # Change Log
 
+## [v0.6.2](https://github.com/cvent/octopus-deploy-cookbook/tree/v0.6.2) (2016-08-16)
+[Full Changelog](https://github.com/cvent/octopus-deploy-cookbook/compare/v0.6.1...v0.6.2)
+
+**Merged pull requests:**
+
+- Change tentacle install parameters to be more quiet [\#52](https://github.com/cvent/octopus-deploy-cookbook/pull/52) ([brentm5](https://github.com/brentm5))
+
 ## [v0.6.1](https://github.com/cvent/octopus-deploy-cookbook/tree/v0.6.1) (2016-08-15)
 [Full Changelog](https://github.com/cvent/octopus-deploy-cookbook/compare/v0.6.0...v0.6.1)
 
