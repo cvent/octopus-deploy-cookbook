@@ -31,6 +31,10 @@ module OctopusDeploy
       options.map { |option| "--#{name} \"#{option}\"" }.join(' ')
     end
 
+    def installer_options
+      '/qn /norestart'
+    end
+
     def api_client(server, api_key)
       options = { headers: { 'X-Octopus-ApiKey' => api_key } }
       Chef::HTTP.new("#{server}/api", options)

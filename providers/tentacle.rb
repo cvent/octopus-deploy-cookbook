@@ -45,7 +45,7 @@ action :install do
     source tentacle_installer
     version version if version && upgrades_enabled
     installer_type :msi
-    options '/passive /norestart'
+    options installer_options
   end
 
   new_resource.updated_by_last_action(download.updated_by_last_action? || install.updated_by_last_action?)

@@ -19,6 +19,12 @@ describe 'OctopusDeploy::Shared' do
     end
   end
 
+  describe 'installer_options' do
+    it 'should return the command line options for msiexec' do
+      expect(shared.installer_options).to eq '/qn /norestart'
+    end
+  end
+
   describe 'api_client' do
     it 'should return an instance of the chef api client' do
       expect(shared).to respond_to :api_client
