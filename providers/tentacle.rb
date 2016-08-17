@@ -165,6 +165,7 @@ action :register do
     # This is sort of a hack, you need to specify the config_path on register if it is not default
     # The other option is to read the registry key but the helpers are not available in 12.4.1
     not_if { tentacle_exists?(server, api_key, tentacle_thumbprint(config_path)) }
+    notifies :restart, "windows_service[#{service_name}]", :delayed
   end
 
   new_resource.updated_by_last_action(actions_updated?([register_instance]))
