@@ -94,7 +94,7 @@ action :configure do
     action :run
     cwd tentacle_install_location
     code <<-EOH
-      .\\Tentacle.exe new-certificate -e "#{cert_file}" --console
+      .\\Tentacle.exe new-certificate --console
       #{catch_powershell_error('Generating Cert for the machine')}
     EOH
     not_if { cert_file.nil? || ::File.exist?(cert_file) }
