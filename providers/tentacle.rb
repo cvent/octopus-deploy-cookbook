@@ -149,6 +149,7 @@ action :register do
   roles = new_resource.roles
   environment = new_resource.environment
   config_path = new_resource.config_path
+  service_name = service_name(instance)
 
   verify_server(server)
   verify_api_key(api_key)
@@ -166,6 +167,10 @@ action :register do
     # The other option is to read the registry key but the helpers are not available in 12.4.1
     not_if { tentacle_exists?(server, api_key, tentacle_thumbprint(config_path)) }
     notifies :restart, "windows_service[#{service_name}]", :delayed
+  end
+
+  windows_service service_name do
+    action :nothing
   end
 
   new_resource.updated_by_last_action(actions_updated?([register_instance]))
