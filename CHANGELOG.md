@@ -1,5 +1,13 @@
 # Change Log
 
+## [v0.6.3](https://github.com/cvent/octopus-deploy-cookbook/tree/v0.6.3) (2016-08-18)
+[Full Changelog](https://github.com/cvent/octopus-deploy-cookbook/compare/v0.6.2...v0.6.3)
+
+**Merged pull requests:**
+
+- Fix issue in notifying tentacle service restart on tentacle register [\#57](https://github.com/cvent/octopus-deploy-cookbook/pull/57) ([spuder](https://github.com/spuder))
+- Restarts tentacle service when registering [\#56](https://github.com/cvent/octopus-deploy-cookbook/pull/56) ([spuder](https://github.com/spuder))
+
 ## [v0.6.2](https://github.com/cvent/octopus-deploy-cookbook/tree/v0.6.2) (2016-08-16)
 [Full Changelog](https://github.com/cvent/octopus-deploy-cookbook/compare/v0.6.1...v0.6.2)
 
