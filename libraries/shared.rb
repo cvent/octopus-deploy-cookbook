@@ -28,7 +28,7 @@ module OctopusDeploy
     # Iterate over every option and make a big long string like:
     # --role "web" --role "database" --role "app-server"
     def option_list(name, options)
-      options.map { |option| "--#{name} \"#{option}\"" }.join(' ')
+      options.map { |option| "--#{name} \"#{option}\"" }.join(' ') if name && options
     end
 
     def installer_options

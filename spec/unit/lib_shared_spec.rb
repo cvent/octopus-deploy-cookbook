@@ -17,6 +17,18 @@ describe 'OctopusDeploy::Shared' do
       options = %w(option1 option2)
       expect(shared.option_list(name, options)).to eq '--name "option1" --name "option2"'
     end
+
+    it 'should return nil if name is nil' do
+      name = nil
+      options = '42'
+      expect(shared.option_list(name, options)).to eq nil
+    end
+
+    it 'should return nil if options is nil' do
+      name = 'foo'
+      options = nil
+      expect(shared.option_list(name, options)).to eq nil
+    end
   end
 
   describe 'installer_options' do
