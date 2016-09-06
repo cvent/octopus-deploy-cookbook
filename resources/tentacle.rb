@@ -37,3 +37,5 @@ attribute :server, kind_of: String
 attribute :api_key, kind_of: String
 attribute :roles, kind_of: Array
 attribute :environment, kind_of: String, default: node.chef_environment
+attribute :tenants, kind_of: Array, default: nil
+attribute :tenant_tags, kind_of: Array, default: nil
