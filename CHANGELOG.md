@@ -1,5 +1,13 @@
 # Change Log
 
+## [v0.6.4](https://github.com/cvent/octopus-deploy-cookbook/tree/v0.6.4) (2016-09-07)
+[Full Changelog](https://github.com/cvent/octopus-deploy-cookbook/compare/v0.6.3...v0.6.4)
+
+**Merged pull requests:**
+
+- Adds tenant and tentanttag support [\#61](https://github.com/cvent/octopus-deploy-cookbook/pull/61) ([spuder](https://github.com/spuder))
+- Fix option\_list methods handling of nils [\#60](https://github.com/cvent/octopus-deploy-cookbook/pull/60) ([spuder](https://github.com/spuder))
+
 ## [v0.6.3](https://github.com/cvent/octopus-deploy-cookbook/tree/v0.6.3) (2016-08-18)
 [Full Changelog](https://github.com/cvent/octopus-deploy-cookbook/compare/v0.6.2...v0.6.3)
 
