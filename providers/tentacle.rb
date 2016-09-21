@@ -147,7 +147,7 @@ action :register do
   server = new_resource.server
   api_key = new_resource.api_key
   roles = new_resource.roles
-  environment = new_resource.environment
+  environment = Array(new_resource.environment)
   config_path = new_resource.config_path
   service_name = service_name(instance)
   tenants = new_resource.tenants
@@ -162,7 +162,7 @@ action :register do
     action :run
     cwd tentacle_install_location
     code <<-EOH
-      .\\Tentacle.exe register-with --instance "#{instance}" --server "#{server}" --name "#{node.name}" --apiKey "#{api_key}" #{register_comm_config(polling, port)} --environment "#{environment}" #{option_list('role', roles)} #{option_list('tenant', tenants)} #{option_list('tenanttag', tenant_tags)} --console
+      .\\Tentacle.exe register-with --instance "#{instance}" --server "#{server}" --name "#{node.name}" --apiKey "#{api_key}" #{register_comm_config(polling, port)} #{option_list('environment', environment)} #{option_list('role', roles)} #{option_list('tenant', tenants)} #{option_list('tenanttag', tenant_tags)} --console
       #{catch_powershell_error('Registering Tentacle')}
     EOH
     # This is sort of a hack, you need to specify the config_path on register if it is not default
@@ -251,5 +251,5 @@ def verify_roles(roles)
 end
 
 def verify_environment(environment)
-  raise 'Environment is required in order to register a Tentacle with Octopus Deploy Server' unless environment
+  raise 'At least 1 environment is required in order to register a Tentacle with Octopus Deploy Server' if environment.nil? || environment.empty?
 end
