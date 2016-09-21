@@ -1,5 +1,12 @@
 # Change Log
 
+## [v0.6.5](https://github.com/cvent/octopus-deploy-cookbook/tree/v0.6.5) (2016-09-21)
+[Full Changelog](https://github.com/cvent/octopus-deploy-cookbook/compare/v0.6.4...v0.6.5)
+
+**Merged pull requests:**
+
+- Allow multiple environments when registering tentacles [\#65](https://github.com/cvent/octopus-deploy-cookbook/pull/65) ([gdavison](https://github.com/gdavison))
+
 ## [v0.6.4](https://github.com/cvent/octopus-deploy-cookbook/tree/v0.6.4) (2016-09-07)
 [Full Changelog](https://github.com/cvent/octopus-deploy-cookbook/compare/v0.6.3...v0.6.4)
 
