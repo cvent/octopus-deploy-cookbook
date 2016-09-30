@@ -67,7 +67,7 @@ end
 - :roles: Array of roles to apply to Tentacle when registering with Octopus Deploy Server (e.g ["web-server","app-server"]) 
 - :environment: Which environment or environments the Tentacle will become part of when registering with Octopus Deploy Server (Defaults to node.chef_environment). Accepts string or array.
 - :tenants: Optional array of tenants to add to the tentacle. Tenant must already exist on Octopus Deploy Server. Requires Octopus 3.4
-- :tenant_tags: Optional array of tenant tags to add to the tentacle. Tags must already exist on Octopus Deploy Server. Requires Octopus 3.4
+- :tenant_tags: Optional array of tenant tags to add to the tentacle. Tags must already exist on Octopus Deploy Server. If tag part of group use `<group>/<tag>`syntax. (e.g. Priority/VIP, Datacenter/US ). Requires Octopus 3.4
 
 #### Examples
 
