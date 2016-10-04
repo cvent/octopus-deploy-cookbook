@@ -8,8 +8,8 @@ source_url 'https://github.com/cvent/octopus-deploy-cookbook'
 issues_url 'https://github.com/cvent/octopus-deploy-cookbook/issues'
 version '0.6.5'
 
-depends 'windows', '~> 1.38'
-depends 'windows_firewall', '~> 3.0.2'
+depends 'windows', '>= 1.38.0'
+depends 'windows_firewall', '~> 3.0'
 supports 'windows'
 
 provides 'octopus_deploy_server[OctopusServer]'
