@@ -1,5 +1,13 @@
 # Change Log
 
+## [v0.7.0](https://github.com/cvent/octopus-deploy-cookbook/tree/v0.7.0) (2016-10-04)
+[Full Changelog](https://github.com/cvent/octopus-deploy-cookbook/compare/v0.6.5...v0.7.0)
+
+**Merged pull requests:**
+
+- Loosen up dependency version locking [\#68](https://github.com/cvent/octopus-deploy-cookbook/pull/68) ([blairham](https://github.com/blairham))
+- Updates readme to clarify tenant tag grouping [\#67](https://github.com/cvent/octopus-deploy-cookbook/pull/67) ([spuder](https://github.com/spuder))
+
 ## [v0.6.5](https://github.com/cvent/octopus-deploy-cookbook/tree/v0.6.5) (2016-09-21)
 [Full Changelog](https://github.com/cvent/octopus-deploy-cookbook/compare/v0.6.4...v0.6.5)
 
