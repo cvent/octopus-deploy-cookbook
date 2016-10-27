@@ -39,3 +39,4 @@ attribute :roles, kind_of: Array
 attribute :environment, kind_of: [String, Array], default: node.chef_environment
 attribute :tenants, kind_of: Array, default: nil
 attribute :tenant_tags, kind_of: Array, default: nil
+attribute :tentacle_name, kind_of: String, default: node.name
