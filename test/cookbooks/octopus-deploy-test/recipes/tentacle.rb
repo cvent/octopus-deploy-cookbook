@@ -32,7 +32,7 @@ end
 
 if node['octopus_deploy_test'] && node['octopus_deploy_test']['username']
   user node['octopus_deploy_test']['username'] do
-    password 'password'
+    password '5up3rR@nd0m'
   end
 end
 
@@ -56,6 +56,6 @@ octopus_deploy_tentacle 'Tentacle' do
   trusted_cert '324JKSJKLSJ324DSFDF3423FDSF8783FDSFSDFS0'
   if node['octopus_deploy_test'] && node['octopus_deploy_test']['username']
     run_as_user ".\\#{node['octopus_deploy_test']['username']}"
-    run_as_password 'password'
+    run_as_password '5up3rR@nd0m'
   end
 end
