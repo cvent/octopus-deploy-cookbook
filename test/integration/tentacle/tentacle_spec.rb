@@ -40,11 +40,11 @@ control 'The Octopus Deploy Tentacle Should be configured' do
     it { should exist }
     it { should be_file }
   end
-  
+
   describe service 'OctopusDeploy Tentacle' do
     it { should be_installed }
   end
-  
+
   describe powershell "Get-WmiObject win32_service | Where-Object { $_.Name -eq 'OctopusDeploy Tentacle' } | select startname -expandproperty startname" do
     it 'runs the Tentacle as the local system user' do
       expect(subject.strip).to eq 'LocalSystem'
