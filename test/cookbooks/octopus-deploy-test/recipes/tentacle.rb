@@ -30,6 +30,12 @@ cookbook_file 'C:\Octopus\tentacle_cert.txt' do
   source 'cert.txt'
 end
 
+if node['octopus_deploy_test'] && node['octopus_deploy_test']['username']
+  user node['octopus_deploy_test']['username'] do
+    password 'password'
+  end
+end
+
 # Just make sure its not installed already
 octopus_deploy_tentacle 'Tentacle' do
   action :uninstall
@@ -48,4 +54,8 @@ octopus_deploy_tentacle 'Tentacle' do
   version tentacle['version']
   checksum tentacle['checksum']
   trusted_cert '324JKSJKLSJ324DSFDF3423FDSF8783FDSFSDFS0'
+  if node['octopus_deploy_test'] && node['octopus_deploy_test']['username']
+    run_as_user ".\\#{node['octopus_deploy_test']['username']}"
+    run_as_password 'password'
+  end
 end

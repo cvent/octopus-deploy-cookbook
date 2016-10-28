@@ -46,8 +46,9 @@ control 'The Octopus Deploy Tentacle Should be configured' do
   end
   
   describe powershell "Get-WmiObject win32_service | Where-Object { $_.Name -eq 'OctopusDeploy Tentacle' } | select startname -expandproperty startname" do
-    it 'runs the Tentacle as the local system user' do
-      expect(subject.strip).to eq 'LocalSystem'
+    #its('stdout') { should eq 'LocalSystem' }
+    it 'runs the Tentacle as a specific user' do
+      expect(subject.strip).to eq '.\octopus_user'
     end
     its('exit_status') { should eq 0 }
   end
