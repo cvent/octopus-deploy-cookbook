@@ -84,7 +84,7 @@ octopus_deploy_tentacle 'configure TentacleWithUser' do
   trusted_cert '324JKSJKLSJ324DSFDF3423FDSF8783FDSFSDFS0'
   service_user ".\\#{node['octopus_deploy_test']['username']}"
   service_password '5up3rR@nd0m'
-  
+
   home_path tentacle_with_user_dir
   config_path File.join(tentacle_with_user_dir, 'Tentacle.config')
   app_path File.join(tentacle_with_user_dir, 'Applications')
