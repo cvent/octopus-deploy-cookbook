@@ -20,9 +20,6 @@ suites:
   - name: tentacle
     run_list:
       - recipe[octopus-deploy-test::tentacle]
-  - name: tentacle_with_name
-    run_list:
-      - recipe[octopus-deploy-test::tentacle]
     attributes:
       octopus_deploy_test:
         username: octopus_user

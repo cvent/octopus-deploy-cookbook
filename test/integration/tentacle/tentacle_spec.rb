@@ -58,3 +58,26 @@ control 'The Octopus Deploy Tentacle Should be configured' do
   #   its('stdout') { should match(/Running/) }
   # end
 end
+
+control 'The Octopus Deploy Tentacle With User Should be configured' do
+  describe file('C:\\Octopus2\\Applications') do
+    it { should exist }
+    it { should be_directory }
+  end
+
+  describe file('C:\\Octopus2\\Tentacle.config') do
+    it { should exist }
+    it { should be_file }
+  end
+
+  describe service 'OctopusDeploy Tentacle: TentacleWithUser' do
+    it { should be_installed }
+  end
+
+  describe powershell "Get-WmiObject win32_service | Where-Object { $_.Name -eq 'OctopusDeploy Tentacle: TentacleWithUser' } | select startname -expandproperty startname" do
+    it 'runs the Tentacle as a specific user' do
+      expect(subject.strip).to eq '.\octopus_user'
+    end
+    its('exit_status') { should eq 0 }
+  end
+end

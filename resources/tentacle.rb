@@ -40,5 +40,5 @@ attribute :environment, kind_of: [String, Array], default: node.chef_environment
 attribute :tenants, kind_of: Array, default: nil
 attribute :tenant_tags, kind_of: Array, default: nil
 attribute :tentacle_name, kind_of: String, default: node.name
-attribute :run_as_user, kind_of: String, default: nil
-attribute :run_as_password, kind_of: String, default: nil
+attribute :service_user, kind_of: String, default: nil
+attribute :service_password, kind_of: String, default: nil
