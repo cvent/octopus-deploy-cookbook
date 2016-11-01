@@ -64,26 +64,20 @@ cookbook_file tentacle_with_user_certfile do
   source 'cert.txt'
 end
 
-user node['octopus_deploy_test']['username'] do
-  password '5up3rR@nd0m'
-end
-
-# Install it here
-octopus_deploy_tentacle 'install TentacleWithUser' do
-  action :install
-  instance 'TentacleWithUser'
-  version tentacle['version']
-  checksum tentacle['checksum']
+service_user = 'octopus_user'
+service_password = '5up3rR@nd0m'
+user service_user do
+  password service_password
 end
 
 octopus_deploy_tentacle 'configure TentacleWithUser' do
-  action :configure
+  action [:install, :configure]
   instance 'TentacleWithUser'
   version tentacle['version']
   checksum tentacle['checksum']
   trusted_cert '324JKSJKLSJ324DSFDF3423FDSF8783FDSFSDFS0'
-  service_user ".\\#{node['octopus_deploy_test']['username']}"
-  service_password '5up3rR@nd0m'
+  service_user ".\\#{service_user}"
+  service_password service_password
 
   home_path tentacle_with_user_dir
   config_path File.join(tentacle_with_user_dir, 'Tentacle.config')

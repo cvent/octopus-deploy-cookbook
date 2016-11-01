@@ -138,6 +138,7 @@ action :configure do
     action [:enable, :start]
     run_as_user service_user
     run_as_password service_password
+    sensitive true if service_user
   end
 
   new_resource.updated_by_last_action(actions_updated?([firewall, install, create_home_dir, generate_cert, create_instance, configure, service]))
