@@ -69,8 +69,8 @@ end
 - :tenants: Optional array of tenants to add to the tentacle. Tenant must already exist on Octopus Deploy Server. Requires Octopus 3.4
 - :tenant_tags: Optional array of tenant tags to add to the tentacle. Tags must already exist on Octopus Deploy Server. If tag is part of a tag group, include the group name followed by a slash `<groupname>/<tag>`. e.g ( Priority/VIP, Datacenter/US ).. Requires Octopus 3.4
 - :tentacle_name: Optional custom name for Tentacle. Defaults to the Chef node name
-- :run_as_user: Optional service user name. Defaults to Local System
-- :run_as_password: Password for service user
+- :service_user: Optional service user name. Defaults to Local System
+- :service_password: Password for service user
 
 #### Examples
 
