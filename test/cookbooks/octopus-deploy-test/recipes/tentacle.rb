@@ -49,3 +49,38 @@ octopus_deploy_tentacle 'Tentacle' do
   checksum tentacle['checksum']
   trusted_cert '324JKSJKLSJ324DSFDF3423FDSF8783FDSFSDFS0'
 end
+
+# Install the Tentacle With User
+
+tentacle_with_user_dir = 'C:\Octopus2'
+
+directory tentacle_with_user_dir do
+  action :create
+end
+
+tentacle_with_user_certfile = File.join(tentacle_with_user_dir, 'tentacle_cert.txt')
+cookbook_file tentacle_with_user_certfile do
+  action :create
+  source 'cert.txt'
+end
+
+service_user = 'octopus_user'
+service_password = '5up3rR@nd0m'
+user service_user do
+  password service_password
+end
+
+octopus_deploy_tentacle 'configure TentacleWithUser' do
+  action [:install, :configure]
+  instance 'TentacleWithUser'
+  version tentacle['version']
+  checksum tentacle['checksum']
+  trusted_cert '324JKSJKLSJ324DSFDF3423FDSF8783FDSFSDFS0'
+  service_user ".\\#{service_user}"
+  service_password service_password
+
+  home_path tentacle_with_user_dir
+  config_path File.join(tentacle_with_user_dir, 'Tentacle.config')
+  app_path File.join(tentacle_with_user_dir, 'Applications')
+  cert_file tentacle_with_user_certfile
+end

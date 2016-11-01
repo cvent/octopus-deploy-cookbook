@@ -67,6 +67,8 @@ action :configure do
   configure_firewall = new_resource.configure_firewall
   service_name = service_name(instance)
   cert_file =  new_resource.cert_file
+  service_user = new_resource.service_user
+  service_password = new_resource.service_password
 
   firewall = windows_firewall_rule 'Octopus Deploy Tentacle' do
     action :create
@@ -134,6 +136,9 @@ action :configure do
   # Make sure enabled and started
   service = windows_service service_name do
     action [:enable, :start]
+    run_as_user service_user
+    run_as_password service_password
+    sensitive true if service_user
   end
 
   new_resource.updated_by_last_action(actions_updated?([firewall, install, create_home_dir, generate_cert, create_instance, configure, service]))
