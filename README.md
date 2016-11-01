@@ -1,9 +1,12 @@
-Octopus Deploy Cookbook
+Octopus Deploy Cookbook <img align="right" src="https://i.octopus.com/blog/201605-logo-text-blueblacktransparent-400_rgb-TTE8.png" />
 =======================
 
 [![Cookbook Converge](https://img.shields.io/appveyor/ci/bigbam505/octopus-deploy-cookbook/master.svg?style=flat-square&label=appveyor)](https://ci.appveyor.com/project/bigbam505/octopus-deploy-cookbook) [![Build Status](https://img.shields.io/travis/cvent/octopus-deploy-cookbook/master.svg?style=flat-square&label=travis)](https://travis-ci.org/cvent/octopus-deploy-cookbook) [![Code Climate](https://img.shields.io/codeclimate/github/cvent/octopus-deploy-cookbook.svg?style=flat-square)](https://codeclimate.com/github/cvent/octopus-deploy-cookbook) [![Chef cookbook](https://img.shields.io/cookbook/v/octopus-deploy.svg?style=flat-square)](https://supermarket.chef.io/cookbooks/octopus-deploy) [![GitHub license](https://img.shields.io/badge/license-Apache%202.0-blue.svg?style=flat-square)](https://github.com/cvent/octopus-deploy-cookbook/blob/master/LICENSE)
 
 This cookbook is used for installing the [Octopus Deploy](http://octopusdeploy.com) server and tentacle on Microsoft Windows machines.
+<br />
+
+**\*\*NOTE:** This cookbook is managed by Cvent and not by the Octopus Deploy team.
 
 
 ## NOTICE: Pre-Release
