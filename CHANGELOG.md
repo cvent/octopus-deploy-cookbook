@@ -1,5 +1,13 @@
 # Change Log
 
+## [v0.8.0](https://github.com/cvent/octopus-deploy-cookbook/tree/v0.8.0) (2016-11-01)
+[Full Changelog](https://github.com/cvent/octopus-deploy-cookbook/compare/v0.7.0...v0.8.0)
+
+**Merged pull requests:**
+
+- Add ability to run tentacle as a specific AD user [\#71](https://github.com/cvent/octopus-deploy-cookbook/pull/71) ([gdavison](https://github.com/gdavison))
+- Add attribute to allow tentacle name to be changed on register  [\#70](https://github.com/cvent/octopus-deploy-cookbook/pull/70) ([gdavison](https://github.com/gdavison))
+
 ## [v0.7.0](https://github.com/cvent/octopus-deploy-cookbook/tree/v0.7.0) (2016-10-04)
 [Full Changelog](https://github.com/cvent/octopus-deploy-cookbook/compare/v0.6.5...v0.7.0)
 
