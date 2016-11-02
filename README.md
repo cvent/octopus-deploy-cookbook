@@ -3,7 +3,7 @@ Octopus Deploy Cookbook <img align="right" src="https://i.octopus.com/blog/20160
 
 [![Cookbook Converge](https://img.shields.io/appveyor/ci/bigbam505/octopus-deploy-cookbook/master.svg?style=flat-square&label=appveyor)](https://ci.appveyor.com/project/bigbam505/octopus-deploy-cookbook) [![Build Status](https://img.shields.io/travis/cvent/octopus-deploy-cookbook/master.svg?style=flat-square&label=travis)](https://travis-ci.org/cvent/octopus-deploy-cookbook) [![Code Climate](https://img.shields.io/codeclimate/github/cvent/octopus-deploy-cookbook.svg?style=flat-square)](https://codeclimate.com/github/cvent/octopus-deploy-cookbook) [![Chef cookbook](https://img.shields.io/cookbook/v/octopus-deploy.svg?style=flat-square)](https://supermarket.chef.io/cookbooks/octopus-deploy) [![GitHub license](https://img.shields.io/badge/license-Apache%202.0-blue.svg?style=flat-square)](https://github.com/cvent/octopus-deploy-cookbook/blob/master/LICENSE)
 
-This cookbook is used for installing the [Octopus Deploy](http://octopusdeploy.com) server and tentacle on Microsoft Windows machines.
+This cookbook is used for installing the [Octopus Deploy](http://octopusdeploy.com) server and Tentacle on Microsoft Windows machines.
 <br />
 
 **\*\*NOTE:** This cookbook is managed by Cvent and not by the Octopus Deploy team.
@@ -47,7 +47,7 @@ end
 ### octopus_deploy_tentacle
 #### Actions
 - :install: Install a version of Octopus Deploy Tentacle (Default)
-- :configure: Configure an instance of the octopus Deploy tentacle
+- :configure: Configure an instance of the octopus Deploy Tentacle
 - :register: Register Tentacle with Octopus Deploy Server
 - :remove: Remove an instance of the Octopus Deploy Tentacle
 - :uninstall: Uninstall a version of the Octopus Deploy Tentacle if it is installed
@@ -60,17 +60,17 @@ end
 - :config_path: The Octopus Deploy Instance config file path (Defaults to C:\Octopus\Tentacle.config)
 - :app_path: The Octopus Deploy Instance application directory (Defaults to C:\Octopus\Applications)
 - :trusted_cert: The Octopus Deploy Instance trusted Server cert
-- :port: The Octopus Deploy Instance port to listen on for listening tentacle (Defaults to 10933)
-- :configure_firewall: Whether cookbook will open firewall on listen tentacles (Defaults to false)
-- :polling: Whether this Octopus Deploy Instance is a polling tentacle (Defaults to False)
+- :port: The Octopus Deploy Instance port to listen on for listening Tentacle (Defaults to 10933)
+- :configure_firewall: Whether cookbook will open firewall on listen Tentacles (Defaults to false)
+- :polling: Whether this Octopus Deploy Instance is a polling Tentacle (Defaults to False)
 - :cert_file: Where to export the Octopus Deploy Instance cert (Defaults to C:\Octopus\tentacle_cert.txt)
-- :upgrades_enabled: Whether to upgrade or downgrade the tentacle version if the windows installer version does not match what is provided in the resource. (Defaults to True)
+- :upgrades_enabled: Whether to upgrade or downgrade the Tentacle version if the windows installer version does not match what is provided in the resource. (Defaults to True)
 - :server: Url to Octopus Deploy Server (e.g https://octopus.example.com)
 - :api_key: Api Key used to register Tentacle to Octopus Server
 - :roles: Array of roles to apply to Tentacle when registering with Octopus Deploy Server (e.g ["web-server","app-server"]) 
 - :environment: Which environment or environments the Tentacle will become part of when registering with Octopus Deploy Server (Defaults to node.chef_environment). Accepts string or array.
-- :tenants: Optional array of tenants to add to the tentacle. Tenant must already exist on Octopus Deploy Server. Requires Octopus 3.4
-- :tenant_tags: Optional array of tenant tags to add to the tentacle. Tags must already exist on Octopus Deploy Server. If tag is part of a tag group, include the group name followed by a slash `<groupname>/<tag>`. e.g ( Priority/VIP, Datacenter/US ).. Requires Octopus 3.4
+- :tenants: Optional array of tenants to add to the Tentacle. Tenant must already exist on Octopus Deploy Server. Requires Octopus 3.4
+- :tenant_tags: Optional array of tenant tags to add to the Tentacle. Tags must already exist on Octopus Deploy Server. If tag is part of a tag group, include the group name followed by a slash `<groupname>/<tag>`. e.g ( Priority/VIP, Datacenter/US ).. Requires Octopus 3.4
 - :tentacle_name: Optional custom name for Tentacle. Defaults to the Chef node name
 - :service_user: Optional service user name. Defaults to Local System
 - :service_password: Password for service user
@@ -79,7 +79,7 @@ end
 
 ##### Install version 3.2.24 of Octopus Deploy Tentacle
 
-This will simply install the version of the tentacle that is specified.
+This will simply install the version of the Tentacle that is specified.
 
 ```ruby
 octopus_deploy_tentacle 'Tentacle' do
@@ -91,7 +91,7 @@ end
 
 ##### Install version 3.2.24 of Octopus Deploy Tentacle and configure it
 
-This will install the tentacle and then configure the tentacle on the machine to communicate with the Octopus Deploy server.  It can also update firewall rules if enabled.
+This will install the Tentacle and then configure the Tentacle on the machine to communicate with the Octopus Deploy server.  It can also update firewall rules if enabled.
 
 ```ruby
 octopus_deploy_tentacle 'Tentacle' do
@@ -106,7 +106,7 @@ end
 
 ##### Register Listening Tentacle with the Octopus Deploy Server
 
-This will check if the tentacle is registered on the Octopus Deploy server and if it is not will register the tentacle in the environment with the tags that are specified.
+This will check if the Tentacle is registered on the Octopus Deploy server and if it is not will register the Tentacle in the environment with the tags that are specified.
 
 ```ruby
 # You will first need to generate an api key
@@ -116,7 +116,7 @@ octopus_deploy_tentacle 'Tentacle' do
   server 'https://octopus.example.com'
   api_key '12345678910'
   roles ['database']
-  # You can set polling to true for a polling tentacle setup
+  # You can set polling to true for a polling Tentacle setup
   # polling true
 end
 ```
@@ -128,11 +128,11 @@ One major assumption of this cookbook is that you already have .net40 installed 
 
 
 ## Known Issues
-This does not work with Octopus Deploy versions less than 3.2.3 because of a bug in [exporting tentacle certificates](https://github.com/OctopusDeploy/Issues/issues/2143)
+This does not work with Octopus Deploy versions less than 3.2.3 because of a bug in [exporting Tentacle certificates](https://github.com/OctopusDeploy/Issues/issues/2143)
 
-Tentacle roles are only used the first time a Tentacle is registered with an Octopus Deploy Server. Updating tentacle roles in cookbook will not update roles on Octopus Deploy Server.
+Tentacle roles are only used the first time a Tentacle is registered with an Octopus Deploy Server. Updating Tentacle roles in cookbook will not update roles on Octopus Deploy Server.
 
-Registering multiple tentacles on the same machine is not supported.
+Registering multiple Tentacles on the same machine is not supported.
 
 Switching Tentacle modes between 'polling' & 'listening' is not currently supported.
 
