@@ -158,6 +158,7 @@ action :register do
   tenants = new_resource.tenants
   tenant_tags = new_resource.tenant_tags
   tentacle_name = new_resource.tentacle_name
+  public_dns = new_resource.public_dns
 
   verify_server(server)
   verify_api_key(api_key)
@@ -168,7 +169,7 @@ action :register do
     action :run
     cwd tentacle_install_location
     code <<-EOH
-      .\\Tentacle.exe register-with --instance "#{instance}" --server "#{server}" --name "#{tentacle_name}" --apiKey "#{api_key}" #{register_comm_config(polling, port)} #{option_list('environment', environment)} #{option_list('role', roles)} #{option_list('tenant', tenants)} #{option_list('tenanttag', tenant_tags)} --console
+      .\\Tentacle.exe register-with --instance "#{instance}" --server "#{server}" --name "#{tentacle_name}" --publicHostName "#{public_dns}" --apiKey "#{api_key}" #{register_comm_config(polling, port)} #{option_list('environment', environment)} #{option_list('role', roles)} #{option_list('tenant', tenants)} #{option_list('tenanttag', tenant_tags)} --console
       #{catch_powershell_error('Registering Tentacle')}
     EOH
     # This is sort of a hack, you need to specify the config_path on register if it is not default
