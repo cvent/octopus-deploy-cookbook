@@ -74,6 +74,7 @@ end
 - :tentacle_name: Optional custom name for Tentacle. Defaults to the Chef node name
 - :service_user: Optional service user name. Defaults to Local System
 - :service_password: Password for service user
+- :public_dns: Optional DNS/IP value to use when registring with the octopus server. Defaults to node['fqdn']
 
 #### Examples
 
