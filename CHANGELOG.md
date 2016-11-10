@@ -1,5 +1,13 @@
 # Change Log
 
+## [v0.9.0](https://github.com/cvent/octopus-deploy-cookbook/tree/v0.9.0) (2016-11-10)
+[Full Changelog](https://github.com/cvent/octopus-deploy-cookbook/compare/v0.8.0...v0.9.0)
+
+**Merged pull requests:**
+
+- Add attribute to allow public hostname to be specified on tentacle register [\#74](https://github.com/cvent/octopus-deploy-cookbook/pull/74) ([Draftkings](https://github.com/Draftkings))
+- Update README with correct capitalization of Tentacle [\#73](https://github.com/cvent/octopus-deploy-cookbook/pull/73) ([vanessalove](https://github.com/vanessalove))
+
 ## [v0.8.0](https://github.com/cvent/octopus-deploy-cookbook/tree/v0.8.0) (2016-11-01)
 [Full Changelog](https://github.com/cvent/octopus-deploy-cookbook/compare/v0.7.0...v0.8.0)
 
