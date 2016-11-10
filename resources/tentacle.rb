@@ -42,3 +42,4 @@ attribute :tenant_tags, kind_of: Array, default: nil
 attribute :tentacle_name, kind_of: String, default: node.name
 attribute :service_user, kind_of: String, default: nil
 attribute :service_password, kind_of: String, default: nil
+attribute :public_dns, kind_of: String, default: node['fqdn']
