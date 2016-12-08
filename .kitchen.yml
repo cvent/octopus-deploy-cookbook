@@ -20,3 +20,6 @@ suites:
   - name: tentacle
     run_list:
       - recipe[octopus-deploy-test::tentacle]
+  - name: tools
+    run_list:
+      - recipe[octopus-deploy-test::tools]
