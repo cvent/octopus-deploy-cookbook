@@ -22,5 +22,5 @@ actions :install
 default_action :install
 
 attribute :path, kind_of: String, default: 'C:\\octopus', name_attribute: true
-attribute :source, kind_of: String
+attribute :source, kind_of: String, required: true
 attribute :checksum, kind_of: String
