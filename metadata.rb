@@ -14,3 +14,4 @@ supports 'windows'
 
 provides 'octopus_deploy_server[OctopusServer]'
 provides 'octopus_deploy_tentacle[Tentacle]'
+provides 'octopus_deploy_tools[C:\octopus]'
