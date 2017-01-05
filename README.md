@@ -123,6 +123,30 @@ end
 ```
 
 
+### octopus_deploy_tools
+#### Actions
+- :install: Install a version of Octopus Deploy tools (Default)
+
+#### Attribute Parameters
+- :path: The Octopus Deploy tools directory (Defaults to C:\Octopus)
+- :source: Required. The url to download the tools from
+- :checksum: The SHA256 checksum of the Octopus Deploy tools zip file to verify download
+
+#### Examples
+
+##### Install version 4.5.1 of Octopus Deploy tools
+
+This will simply install the version of the tools that is specified to the `C:\fun` folder
+
+```ruby
+octopus_deploy_tools 'C:\fun' do
+  action :install
+  source 'https://download.octopusdeploy.com/octopus-tools/4.5.1/OctopusTools.4.5.1.zip'
+  checksum 'd6794027d413764e7a892547fba9ed410bfa0a53425b178f628128d2b1aebb5f' # sha256 checksum
+end
+```
+
+
 ## Assumptions
 
 One major assumption of this cookbook is that you already have .net40 installed on your server.  If you do not then you might need to do that before this cookbook. In addition, some of the resources in here require Chef version 12 in order to work.
