@@ -1,5 +1,12 @@
 # Change Log
 
+## [v0.10.0](https://github.com/cvent/octopus-deploy-cookbook/tree/v0.10.0) (2017-01-05)
+[Full Changelog](https://github.com/cvent/octopus-deploy-cookbook/compare/v0.9.0...v0.10.0)
+
+**Merged pull requests:**
+
+- Add tools resource to allow installing of octopus deploy tools [\#77](https://github.com/cvent/octopus-deploy-cookbook/pull/77) ([brentm5](https://github.com/brentm5))
+
 ## [v0.9.0](https://github.com/cvent/octopus-deploy-cookbook/tree/v0.9.0) (2016-11-10)
 [Full Changelog](https://github.com/cvent/octopus-deploy-cookbook/compare/v0.8.0...v0.9.0)
 
