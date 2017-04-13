@@ -33,3 +33,4 @@ attribute :create_database, kind_of: [TrueClass, FalseClass], default: false
 attribute :admin_user, kind_of: String
 attribute :license, kind_of: String
 attribute :start_service, kind_of: [TrueClass, FalseClass], default: true
+attribute :debug, kind_of: [TrueClass, FalseClass], default: false
