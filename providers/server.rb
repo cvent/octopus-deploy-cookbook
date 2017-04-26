@@ -110,7 +110,6 @@ action :configure do
     #{catch_powershell_error('Create Service')}
     EOH
     sensitive !debug
-    notifies :restart, "windows_service[#{service_name}]", :delayed if start_service
     not_if { ::Win32::Service.exists?(service_name) }
   end
 
