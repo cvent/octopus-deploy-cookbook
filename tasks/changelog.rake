@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 begin
   require 'chef/cookbook/metadata'
   require 'github_changelog_generator/task'

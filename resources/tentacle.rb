@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 #
 # Author:: Brent Montague (<bmontague@cvent.com>)
 # Cookbook Name:: octopus-deploy
@@ -30,7 +31,7 @@ attribute :app_path, kind_of: String, default: 'C:\Octopus\Applications'
 attribute :trusted_cert, kind_of: String
 attribute :polling, kind_of: [TrueClass, FalseClass], default: false
 attribute :configure_firewall, kind_of: [TrueClass, FalseClass], default: false
-attribute :port, kind_of: [Fixnum, NilClass], default: nil
+attribute :port, kind_of: [Integer, NilClass], default: nil
 attribute :cert_file, kind_of: String, default: 'C:\Octopus\tentacle_cert.txt'
 attribute :upgrades_enabled, kind_of: [TrueClass, FalseClass], default: true
 attribute :server, kind_of: String

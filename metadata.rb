@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 name 'octopus-deploy'
 maintainer 'Montague, Brent'
 maintainer_email 'BMontague@cvent.com'
