@@ -1,5 +1,13 @@
 # Change Log
 
+## [v0.11.0](https://github.com/cvent/octopus-deploy-cookbook/tree/v0.11.0) (2017-05-08)
+[Full Changelog](https://github.com/cvent/octopus-deploy-cookbook/compare/v0.10.1...v0.11.0)
+
+**Merged pull requests:**
+
+- Use sensitive attribute for server resource instead of debug [\#89](https://github.com/cvent/octopus-deploy-cookbook/pull/89) ([brentm5](https://github.com/brentm5))
+- Removes the Server resources delayed restart [\#83](https://github.com/cvent/octopus-deploy-cookbook/pull/83) ([brentm5](https://github.com/brentm5))
+
 ## [v0.10.1](https://github.com/cvent/octopus-deploy-cookbook/tree/v0.10.1) (2017-04-13)
 [Full Changelog](https://github.com/cvent/octopus-deploy-cookbook/compare/v0.10.0...v0.10.1)
 
