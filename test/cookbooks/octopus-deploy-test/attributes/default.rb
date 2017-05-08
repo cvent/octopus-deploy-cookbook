@@ -23,6 +23,7 @@
 default['octopus-deploy-test']['server']['version'] = '3.2.24'
 default['octopus-deploy-test']['server']['checksum'] = 'fe82d0ebd4d0cc9baa38962d8224578154131856a3c3e63621e4834efa3006d7'
 default['octopus-deploy-test']['server']['master-key'] = 'wJ+qLI8AjSvtdtIt05eW7w=='
+default['octopus-deploy-test']['server']['connection-string'] = 'Data Source=localhostdba;Initial Catalog=octo;Integrated Security=False;User ID=octo;Password=password'
 
 # Tentacle test configuration
 default['octopus-deploy-test']['tentacle']['version'] = '3.2.24'

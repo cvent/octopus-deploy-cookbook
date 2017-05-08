@@ -67,7 +67,7 @@ action :configure do
   license = new_resource.license
   create_database = new_resource.create_database
   start_service = new_resource.start_service
-  debug = new_resource.debug
+  is_sensitive = new_resource.sensitive
 
   install = octopus_deploy_server name do
     action :install
@@ -110,7 +110,7 @@ action :configure do
     .\\Octopus.Server.exe service --instance "#{instance}" --install --reconfigure --console
     #{catch_powershell_error('Create Service')}
     EOH
-    sensitive !debug
+    sensitive is_sensitive
     not_if { ::Win32::Service.exists?(service_name) }
   end
 

@@ -30,7 +30,8 @@ octopus_deploy_server 'OctopusServer' do
   version node['octopus-deploy-test']['server']['version']
   checksum node['octopus-deploy-test']['server']['checksum']
   node_name 'octo-web-01'
-  connection_string 'Data Source=localhostdba;Initial Catalog=octo;Integrated Security=False;User ID=octo;Password=password'
-  start_service false
+  connection_string node['octopus-deploy-test']['server']['connection-string']
   master_key node['octopus-deploy-test']['server']['master-key']
+  start_service false
+  sensitive true
 end
