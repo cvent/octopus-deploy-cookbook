@@ -28,16 +28,12 @@ property :checksum, kind_of: String
 default_action :install
 
 action :install do
-  path = new_resource.path
-  checksum = new_resource.checksum
-  tools_source = new_resource.source
-
   tools_zip = ::File.join(Chef::Config[:file_cache_path], 'OctopusTools.zip')
 
   remote_file tools_zip do
     action :create
-    source tools_source
-    checksum checksum if checksum
+    source new_resource.source
+    checksum new_resource.checksum if new_resource.checksum
   end
 
   directory path do
