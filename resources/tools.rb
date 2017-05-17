@@ -19,9 +19,31 @@
 # limitations under the License.
 #
 
-actions :install
+resource_name 'octopus_deploy_tools'
+
+property :path, kind_of: String, name_attribute: true
+property :source, kind_of: String, required: true
+property :checksum, kind_of: String
+
 default_action :install
 
-attribute :path, kind_of: String, default: 'C:\\octopus', name_attribute: true
-attribute :source, kind_of: String, required: true
-attribute :checksum, kind_of: String
+action :install do
+  tools_zip = ::File.join(Chef::Config[:file_cache_path], 'OctopusTools.zip')
+
+  remote_file tools_zip do
+    action :create
+    source new_resource.source
+    checksum new_resource.checksum if new_resource.checksum
+  end
+
+  directory path do
+    action :create
+    recursive true
+  end
+
+  windows_zipfile path do
+    action :unzip
+    source tools_zip
+    not_if { ::File.exist?(::File.join(path, 'Octo.exe')) }
+  end
+end
