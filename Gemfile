@@ -10,6 +10,7 @@ group :development do
   gem 'kitchen-vagrant'
   gem 'kitchen-inspec'
   gem 'rspec'
+  gem 'berkshelf'
 end
 
 group :appveyor do
