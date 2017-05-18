@@ -11,6 +11,7 @@ group :development do
   gem 'kitchen-inspec'
   gem 'rspec'
   gem 'berkshelf'
+  gem 'codecov'
 end
 
 group :appveyor do

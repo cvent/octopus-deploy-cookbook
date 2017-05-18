@@ -11,3 +11,4 @@ Berksfile.lock
 .kitchen.local.yml
 vendor/
 .rubocop-http*
+coverage/

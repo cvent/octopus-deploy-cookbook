@@ -90,11 +90,16 @@ GEM
       rack (~> 2.0)
       uuidtools (~> 2.1)
     cleanroom (1.0.0)
+    codecov (0.1.10)
+      json
+      simplecov
+      url
     coderay (1.1.1)
     concurrent-ruby (1.0.5)
     cookstyle (1.3.1)
       rubocop (= 0.47.1)
     diff-lcs (1.3)
+    docile (1.1.5)
     docker-api (1.33.4)
       excon (>= 0.38.0)
       json
@@ -302,6 +307,11 @@ GEM
       rspec-its
       specinfra (~> 2.53)
     sfl (2.3)
+    simplecov (0.14.1)
+      docile (~> 1.1.0)
+      json (>= 1.8, < 3)
+      simplecov-html (~> 0.10.0)
+    simplecov-html (0.10.1)
     slop (3.6.0)
     solve (3.1.0)
       molinillo (>= 0.5)
@@ -344,6 +354,7 @@ GEM
     tzinfo (1.2.3)
       thread_safe (~> 0.1)
     unicode-display_width (1.2.1)
+    url (0.3.2)
     uuidtools (2.1.5)
     varia_model (0.6.0)
       buff-extensions (~> 2.0)
@@ -371,6 +382,7 @@ PLATFORMS
 DEPENDENCIES
   berkshelf
   chef
+  codecov
   cookstyle
   foodcritic (~> 4.0)
   github_changelog_generator
