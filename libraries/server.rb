@@ -19,9 +19,13 @@
 # limitations under the License.
 #
 
+require_relative 'shared'
+
 module OctopusDeploy
   # A container to hold the server values instead of attributes
   module Server
+    include OctopusDeploy::Shared
+
     def display_name
       'Octopus Deploy Server'
     end

@@ -19,6 +19,8 @@
 # limitations under the License.
 #
 
+require_relative 'shared'
+
 module OctopusDeploy
   # A container to hold the tentacle values instead of attributes
   module Tentacle

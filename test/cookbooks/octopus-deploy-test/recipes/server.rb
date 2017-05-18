@@ -19,19 +19,13 @@
 # limitations under the License.
 #
 
-# Just make sure its not installed already
+# We remove and then configure everything everytime
 octopus_deploy_server 'OctopusServer' do
-  action :remove
-  version node['octopus-deploy-test']['server']['version']
-end
-
-octopus_deploy_server 'OctopusServer' do
-  action :configure
+  action [:uninstall, :install, :remove, :configure]
   version node['octopus-deploy-test']['server']['version']
   checksum node['octopus-deploy-test']['server']['checksum']
   node_name 'octo-web-01'
   connection_string node['octopus-deploy-test']['server']['connection-string']
   master_key node['octopus-deploy-test']['server']['master-key']
   start_service false
-  sensitive true
 end
