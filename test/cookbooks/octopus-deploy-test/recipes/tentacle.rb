@@ -22,66 +22,47 @@
 tentacle = node['octopus-deploy-test']['tentacle']
 
 # This section will mock out the certificate creation
-directory 'C:\Octopus' do
-  action :create
-end
-
-cookbook_file 'C:\Octopus\tentacle_cert.txt' do
+cert_file = 'C:\tentacle_cert.txt'
+cookbook_file cert_file do
   action :create
   source 'cert.txt'
 end
 
 # Just make sure its not installed already
-octopus_deploy_tentacle 'Tentacle' do
+octopus_deploy_tentacle 'Uninstaller' do
   action :uninstall
   version tentacle['version']
 end
 
-# Install it here
+# The configure action should also install the tentacle
 octopus_deploy_tentacle 'Tentacle' do
-  action :install
-  version tentacle['version']
-  checksum tentacle['checksum']
-end
-
-octopus_deploy_tentacle 'Tentacle' do
-  action :configure
+  action [:remove, :configure]
   version tentacle['version']
   checksum tentacle['checksum']
   trusted_cert '324JKSJKLSJ324DSFDF3423FDSF8783FDSFSDFS0'
+  cert_file cert_file
 end
 
-# Install the Tentacle With User
-
-tentacle_with_user_dir = 'C:\Octopus2'
-
-directory tentacle_with_user_dir do
-  action :create
-end
-
-tentacle_with_user_certfile = File.join(tentacle_with_user_dir, 'tentacle_cert.txt')
-cookbook_file tentacle_with_user_certfile do
-  action :create
-  source 'cert.txt'
-end
-
+# Create a user to run the tentacle as (the cookbook assumes the user is already present)
 service_user = 'octopus_user'
 service_password = '5up3rR@nd0m'
+
 user service_user do
+  action :create
   password service_password
 end
 
 octopus_deploy_tentacle 'configure TentacleWithUser' do
-  action [:install, :configure]
+  action [:remove, :configure]
   instance 'TentacleWithUser'
   version tentacle['version']
   checksum tentacle['checksum']
+  polling true
   trusted_cert '324JKSJKLSJ324DSFDF3423FDSF8783FDSFSDFS0'
   service_user ".\\#{service_user}"
   service_password service_password
-
-  home_path tentacle_with_user_dir
-  config_path File.join(tentacle_with_user_dir, 'Tentacle.config')
-  app_path File.join(tentacle_with_user_dir, 'Applications')
-  cert_file tentacle_with_user_certfile
+  home_path 'C:\OctopusWithUser'
+  config_path 'C:\OctopusWithUser\Tentacle.config'
+  app_path 'C:\OctopusWithUser\Applications'
+  cert_file cert_file
 end

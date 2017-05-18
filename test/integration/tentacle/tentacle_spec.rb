@@ -61,12 +61,12 @@ control 'The Octopus Deploy Tentacle Should be configured' do
 end
 
 control 'The Octopus Deploy Tentacle With User Should be configured' do
-  describe file('C:\\Octopus2\\Applications') do
+  describe file('C:\\OctopusWithUser\\Applications') do
     it { should exist }
     it { should be_directory }
   end
 
-  describe file('C:\\Octopus2\\Tentacle.config') do
+  describe file('C:\\OctopusWithUser\\Tentacle.config') do
     it { should exist }
     it { should be_file }
   end
