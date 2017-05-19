@@ -22,14 +22,26 @@ describe 'OctopusDeploy::Tentacle' do
   end
 
   describe 'tentacle_install_location' do
-    it 'should exist' do
-      expect(tentacle).to respond_to :tentacle_install_location
+    it 'should return the install location' do
+      expect(tentacle.tentacle_install_location).to eq 'C:\Program Files\Octopus Deploy\Tentacle'
     end
   end
 
   describe 'tentacle_exists?' do
-    it 'should exist' do
-      expect(tentacle).to respond_to :tentacle_exists?
+    it 'should return true if the tentacle exists' do
+      stub_request(:get, 'https://octopus.com/api/machines/all?thumbprint=1234')
+        .to_return(status: 200, body: '[{"Thumbprint": "1234"}]')
+
+      exists = tentacle.tentacle_exists?('https://octopus.com', 'API-key', '1234')
+      expect(exists).to eq true
+    end
+
+    it 'should return false if the tentacle doesnt exist' do
+      stub_request(:get, 'https://octopus.com/api/machines/all?thumbprint=1234')
+        .to_return(status: 200, body: '[]')
+
+      exists = tentacle.tentacle_exists?('https://octopus.com', 'API-key', '1234')
+      expect(exists).to eq false
     end
   end
 
@@ -50,8 +62,8 @@ describe 'OctopusDeploy::Tentacle' do
   end
 
   describe 'installer_url' do
-    it 'should exist' do
-      expect(tentacle).to respond_to :installer_url
+    it 'should return the correct installer url' do
+      expect(tentacle.installer_url('3.2.1')).to eq 'https://download.octopusdeploy.com/octopus/Octopus.Tentacle.3.2.1-x64.msi'
     end
   end
 

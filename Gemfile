@@ -12,6 +12,7 @@ group :development do
   gem 'rspec'
   gem 'berkshelf'
   gem 'codecov'
+  gem 'webmock'
 end
 
 group :appveyor do
