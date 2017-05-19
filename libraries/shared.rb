@@ -19,6 +19,8 @@
 # limitations under the License.
 #
 
+require 'chef/http'
+
 module OctopusDeploy
   # A container to hold the shared logic instead of attributes
   module Shared
@@ -39,10 +41,6 @@ module OctopusDeploy
     def api_client(server, api_key)
       options = { headers: { 'X-Octopus-ApiKey' => api_key } }
       Chef::HTTP.new("#{server}/api", options)
-    end
-
-    def actions_updated?(actions)
-      actions.any?(&:updated_by_last_action?)
     end
 
     def catch_powershell_error(error_text)

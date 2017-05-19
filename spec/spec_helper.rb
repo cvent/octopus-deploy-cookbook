@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 $LOAD_PATH.unshift File.dirname('./libraries')
 
+require 'webmock/rspec'
 require 'simplecov'
-SimpleCov.start
+require 'codecov'
 
-if ENV['CI'] == 'true'
-  require 'codecov'
-  SimpleCov.formatter = SimpleCov::Formatter::Codecov
-end
+SimpleCov.start
+SimpleCov.formatter = SimpleCov::Formatter::Codecov if ENV['CI'] == 'true'

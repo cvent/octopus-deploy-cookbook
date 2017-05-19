@@ -40,7 +40,9 @@ describe 'OctopusDeploy::Shared' do
 
   describe 'api_client' do
     it 'should return an instance of the chef api client' do
-      expect(shared).to respond_to :api_client
+      client = shared.api_client('https://octopus.com', 'API-blah')
+      expect(client).to be_a Chef::HTTP
+      expect(client.url).to eq 'https://octopus.com/api'
     end
   end
 
