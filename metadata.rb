@@ -10,7 +10,7 @@ issues_url 'https://github.com/cvent/octopus-deploy-cookbook/issues'
 version '0.11.0'
 
 depends 'windows', '>= 1.38.0'
-depends 'windows_firewall', '~> 3.0'
+depends 'windows_firewall', '~> 3.0.0'
 supports 'windows'
 
 provides 'octopus_deploy_server[OctopusServer]'
