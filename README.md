@@ -25,7 +25,7 @@ This is pre release and there will be major changes to this before its final rel
 - :checksum: The SHA256 checksum of the Octopus Deploy Server msi file to verify download
 - :home_path: The Octopus Deploy Server home directory (Defaults to C:\Octopus)
 - :config_path: The Octopus Deploy Server config file path (Defaults to C:\Octopus\OctopusServer.config)
-- :connection_string: The Octopus Deploy Server connection string to the MSSQL Server instance
+- :connection_string: The Octopus Deploy Server connection string to the MSSQL Server instance. Required for `:configure` action.
 - :master_key: The Octopus Deploy Server master key for encryption, leave blank to generate one at creation
 - :node_name: The Octopus Deploy Server Node Name, will default to machine hostname
 - :create_database: Whether Octopus Deploy Server should create the database with the connection string provided (Defaults to false)
