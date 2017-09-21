@@ -34,15 +34,38 @@ This is pre release and there will be major changes to this before its final rel
 - :start_service: Whether to start the Octopus Deploy Server service after creation of the instance (Defaults to True)
 
 #### Example
-Install version 3.1.1 of Octopus Deploy Server
+Install version 3.17.1 of Octopus Deploy Server
 
 ```ruby
 octopus_deploy_server 'OctopusServer' do
   action :install
-  version '3.1.1'
+  version '3.17.1'
   checksum '<SHA256-checksum>'
 end
 ```
+
+Install MSSQL Express and Octopus Deploy Server 3.17.1 
+
+```ruby
+chocolatey_package 'mssqlserver2014express' do
+  action :install
+  options '--cachelocation c:\temp\choco'
+end
+
+octopus_database = "OctopusDeploy"
+
+octopus_deploy_server 'OctopusServer' do
+  action [:install, :configure]
+  version '3.17.1'
+  checksum'cee5ef29d6e517d197687c50a041be47a3bd56a65010051ddc53dc0c515d39e5'
+  connection_string "Data Source=(local)\\SQLEXPRESS;Initial Catalog=#{octopus_database};Integrated Security=True"
+  node_name node.name
+  create_database true
+  license '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  start_service true
+end
+```
+
 
 ### octopus_deploy_tentacle
 #### Actions
