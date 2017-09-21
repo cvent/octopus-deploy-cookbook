@@ -61,7 +61,7 @@ action :install do
     checksum new_resource.checksum if new_resource.checksum
   end
 
-  windows_package display_name do
+  package display_name do
     action :install
     source tentacle_installer
     version new_resource.version if new_resource.version && upgrades_enabled
@@ -190,7 +190,7 @@ action :remove do
 end
 
 action :uninstall do
-  windows_package display_name do
+  package display_name do
     action :remove
     source 'nothing'
   end
