@@ -9,7 +9,7 @@ source_url 'https://github.com/cvent/octopus-deploy-cookbook'
 issues_url 'https://github.com/cvent/octopus-deploy-cookbook/issues'
 version '0.12.0'
 
-depends 'windows', '>= 1.38.0'
+depends 'windows'
 depends 'windows_firewall', '~> 3.0'
 supports 'windows'
 
