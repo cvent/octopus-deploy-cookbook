@@ -62,6 +62,7 @@ end
 
 action :configure do
   action_install
+  verify_connection_string(connection_string)
 
   powershell_script "create-instance-#{instance}" do
     action :run
@@ -143,6 +144,10 @@ end
 
 def verify_version(version)
   raise 'A version is required in order to install Octopus Deploy Server' unless version
+end
+
+def verify_connection_string(connection_string)
+  raise 'A connection string is required in order to configure Octopus Deploy Server' unless connection_string
 end
 
 def verify_checksum(checksum)
