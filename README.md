@@ -29,7 +29,7 @@ This is pre release and there will be major changes to this before its final rel
 - :master_key: The Octopus Deploy Server master key for encryption, leave blank to generate one at creation
 - :node_name: The Octopus Deploy Server Node Name, will default to machine hostname
 - :create_database: Whether Octopus Deploy Server should create the database with the connection string provided (Defaults to false)
-- :admin_user: A default admin in AD for the Octopus Deploy Server to create
+- :admin_user: A default admin user for Octopus Deploy Server to create. Requires machine to be joined to active directory, and `admin_user` must be an AD user
 - :license: The raw license key for Octopus Deploy Server to use
 - :start_service: Whether to start the Octopus Deploy Server service after creation of the instance (Defaults to True)
 
