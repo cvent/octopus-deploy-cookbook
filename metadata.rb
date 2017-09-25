@@ -17,4 +17,4 @@ provides 'octopus_deploy_server[OctopusServer]'
 provides 'octopus_deploy_tentacle[Tentacle]'
 provides 'octopus_deploy_tools[C:\octopus]'
 
-chef_version '>= 12.5.0' if respond_to?(:chef_version)
+chef_version '>= 12.6.0' if respond_to?(:chef_version)
