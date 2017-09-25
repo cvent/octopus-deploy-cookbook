@@ -17,6 +17,11 @@ suites:
   - name: server
     run_list:
       - recipe[octopus-deploy-test::server]
+    attributes:
+      octopus-deploy-test:
+        server:
+          create-database: false
+          start-service: false
   - name: tentacle
     run_list:
       - recipe[octopus-deploy-test::tentacle]
