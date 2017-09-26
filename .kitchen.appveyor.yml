@@ -3,5 +3,26 @@ driver:
   name: localhost
   clean_up_on_destroy: false
 
-  platforms:
-    - name: windows
+provisioner:
+  name: chef_zero
+  require_chef_omnibus: 12.9.41
+  log_level: info
+
+verifier:
+  name: inspec
+  format: documentation
+
+platforms:
+  - name: windows
+
+suites:
+  - name: appveyor
+    run_list:
+      - recipe[octopus-deploy-test::server]
+      - recipe[octopus-deploy-test::tentacle]
+      - recipe[octopus-deploy-test::tools]
+    attributes:
+      octopus-deploy-test:
+        server:
+          create-database: true
+          start-service: true
