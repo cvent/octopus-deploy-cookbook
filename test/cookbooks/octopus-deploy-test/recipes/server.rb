@@ -27,5 +27,6 @@ octopus_deploy_server 'OctopusServer' do
   node_name 'octo-web-01'
   connection_string node['octopus-deploy-test']['server']['connection-string']
   master_key node['octopus-deploy-test']['server']['master-key']
-  start_service false
+  start_service node['octopus-deploy-test']['server']['start-service']
+  create_database node['octopus-deploy-test']['server']['create-database']
 end
