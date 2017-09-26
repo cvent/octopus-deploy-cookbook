@@ -30,7 +30,7 @@ property :home_path, String, default: 'C:\Octopus'
 property :config_path, String, default: 'C:\Octopus\OctopusServer.config'
 property :connection_string, String
 property :master_key, String
-property :node_name, String
+property :node_name, String, default: node.name
 property :create_database, [true, false], default: false
 property :admin_user, String
 property :license, String
