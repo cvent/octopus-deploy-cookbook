@@ -46,6 +46,8 @@ end
 
 Install MSSQL Express and Octopus Deploy Server 3.17.1 
 
+**Warning: You will still need to manually grant database db_owner rights. See [issue 119](https://github.com/cvent/octopus-deploy-cookbook/issues/119) for documentation**
+
 ```ruby
 chocolatey_package 'mssqlserver2014express' do
   action :install
