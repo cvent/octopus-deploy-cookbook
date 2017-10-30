@@ -47,9 +47,26 @@ module OctopusDeploy
     end
 
     def tentacle_exists?(server, api_key, thumbprint)
-      ::JSON.parse(api_client(server, api_key).get("/machines/all?thumbprint=#{thumbprint}")).any? do |machine|
-        machine['Thumbprint'] == thumbprint
+      if node['platform_family'] == 'windows'
+        stdout = powershell_out(get_all_tentacles(server, api_key, thumbprint)).stdout.chomp
+        if stdout == thumbprint
+          return true
+        else
+          return false
+        end
+      else
+        ::JSON.parse(api_client(server, api_key).get("/machines/all?thumbprint=#{thumbprint}")).any? do |machine|
+          machine['Thumbprint'] == thumbprint
+        end
       end
+    end
+
+    def get_all_tentacles(server, api_key, thumbprint)
+      %Q{
+        $url = '#{server}' + '/api/machines/all?thumbprint=' + '#{thumbprint}'
+        $result = Invoke-RestMethod -Method Get -Uri $url -Headers @{'X-Octopus-ApiKey' = '#{api_key}'}
+        $result.thumbprint
+      }
     end
 
     def tentacle_thumbprint(config)
