@@ -47,14 +47,8 @@ module OctopusDeploy
     end
 
     def tentacle_exists?(server, api_key, thumbprint)
-      if node['platform_family'] == 'windows'
-        stdout = powershell_out(get_all_tentacles(server, api_key, thumbprint)).stdout.chomp
-        stdout != thumbprint
-      else
-        ::JSON.parse(api_client(server, api_key).get("/machines/all?thumbprint=#{thumbprint}")).any? do |machine|
-          machine['Thumbprint'] == thumbprint
-        end
-      end
+      stdout = powershell_out(get_all_tentacles(server, api_key, thumbprint)).stdout.chomp
+      stdout != thumbprint
     end
 
     def get_all_tentacles(server, api_key, thumbprint)
