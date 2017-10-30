@@ -25,6 +25,7 @@ module OctopusDeploy
   # A container to hold the tentacle values instead of attributes
   module Tentacle
     include OctopusDeploy::Shared
+    include Chef::Mixin::PowershellOut
 
     def display_name
       'Octopus Deploy Tentacle'
