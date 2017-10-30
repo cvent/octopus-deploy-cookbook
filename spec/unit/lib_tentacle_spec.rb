@@ -27,24 +27,6 @@ describe 'OctopusDeploy::Tentacle' do
     end
   end
 
-  describe 'tentacle_exists?' do
-    it 'should return true if the tentacle exists' do
-      stub_request(:get, 'https://octopus.com/api/machines/all?thumbprint=1234')
-        .to_return(status: 200, body: '[{"Thumbprint": "1234"}]')
-
-      exists = tentacle.tentacle_exists?('https://octopus.com', 'API-key', '1234')
-      expect(exists).to eq true
-    end
-
-    it 'should return false if the tentacle doesnt exist' do
-      stub_request(:get, 'https://octopus.com/api/machines/all?thumbprint=1234')
-        .to_return(status: 200, body: '[]')
-
-      exists = tentacle.tentacle_exists?('https://octopus.com', 'API-key', '1234')
-      expect(exists).to eq false
-    end
-  end
-
   describe 'tentacle_thumbprint' do
     it 'should return nil if the file does not exist' do
       allow(::File).to receive(:exist?).with('file').and_return(false)
