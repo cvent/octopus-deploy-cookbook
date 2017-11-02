@@ -25,6 +25,7 @@ module OctopusDeploy
   # A container to hold the tentacle values instead of attributes
   module Tentacle
     include OctopusDeploy::Shared
+    include Chef::Mixin::PowershellOut
 
     def display_name
       'Octopus Deploy Tentacle'
@@ -47,9 +48,16 @@ module OctopusDeploy
     end
 
     def tentacle_exists?(server, api_key, thumbprint)
-      ::JSON.parse(api_client(server, api_key).get("/machines/all?thumbprint=#{thumbprint}")).any? do |machine|
-        machine['Thumbprint'] == thumbprint
-      end
+      stdout = powershell_out(get_all_tentacles(server, api_key, thumbprint)).stdout.chomp
+      stdout != thumbprint
+    end
+
+    def get_all_tentacles(server, api_key, thumbprint)
+      %(
+        $url = '#{server}' + '/api/machines/all?thumbprint=' + '#{thumbprint}'
+        $result = Invoke-RestMethod -Method Get -Uri $url -Headers @{'X-Octopus-ApiKey' = '#{api_key}'}
+        $result.thumbprint
+      )
     end
 
     def tentacle_thumbprint(config)
