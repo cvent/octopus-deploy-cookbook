@@ -36,14 +36,14 @@ action :install do
     checksum new_resource.checksum if new_resource.checksum
   end
 
-  directory path do
+  directory new_resource.path do
     action :create
     recursive true
   end
 
-  windows_zipfile path do
+  windows_zipfile new_resource.path do
     action :unzip
     source tools_zip
-    not_if { ::File.exist?(::File.join(path, 'Octo.exe')) }
+    not_if { ::File.exist?(::File.join(new_resource.path, 'Octo.exe')) }
   end
 end

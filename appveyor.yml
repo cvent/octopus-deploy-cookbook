@@ -24,7 +24,7 @@ init:
   - ps: $PSVersionTable
 
 install:
-  - ps: . { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install -channel stable -project chefdk -version 2.3.1
+  - ps: . { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install -channel stable -project chefdk -version 2.4.17
   - SET PATH=C:\opscode\chefdk\bin;%PATH%
 
 before_build:

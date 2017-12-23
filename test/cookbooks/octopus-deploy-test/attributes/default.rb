@@ -26,7 +26,7 @@ default['octopus-deploy-test']['server']['master-key'] = 'wJ+qLI8AjSvtdtIt05eW7w
 default['octopus-deploy-test']['server']['connection-string'] = 'Server=(local)\SQL2016;Database=master;User ID=sa;Password=Password12!'
 
 # Tentacle test configuration
-default['octopus-deploy-test']['tentacle']['version'] = '3.2.24'
-default['octopus-deploy-test']['tentacle']['checksum'] = '147f84241c912da1c8fceaa6bda6c9baf980a77e55e61537880238feb3b7000a'
+default['octopus-deploy-test']['tentacle']['version'] = '3.16.3'
+default['octopus-deploy-test']['tentacle']['checksum'] = 'c6874bb29fe8550f275f879264fa60c9b196b39cc97d3148f969c3cc3341d440'
 default['octopus-deploy-test']['tentacle']['instance'] = 'Tentacle'
 default['octopus-deploy-test']['tentacle']['config_path'] = 'C:\\Octopus\\Tentacle.config'
