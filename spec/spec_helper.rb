@@ -5,5 +5,7 @@ require 'webmock/rspec'
 require 'simplecov'
 require 'codecov'
 
-SimpleCov.start
+SimpleCov.start do
+  add_filter '/spec/' # Ignore all testing files
+end
 SimpleCov.formatter = SimpleCov::Formatter::Codecov if ENV['CI'] == 'true'

@@ -28,4 +28,10 @@ describe 'OctopusDeploy::Server' do
       expect(server.installer_url('3.2.1')).to eq 'https://download.octopusdeploy.com/octopus/Octopus.3.2.1-x64.msi'
     end
   end
+
+  describe 'scripts' do
+    it 'should return the ServerScripts class' do
+      expect(server.scripts).to be_a_kind_of(ServerScripts)
+    end
+  end
 end
