@@ -55,7 +55,7 @@ end
 octopus_deploy_tentacle 'configure TentacleWithUser' do
   action [:remove, :configure]
   instance 'TentacleWithUser'
-  version tentacle['version']
+  install_url tentacle['installer_url']
   checksum tentacle['checksum']
   polling true
   trusted_cert '324JKSJKLSJ324DSFDF3423FDSF8783FDSFSDFS0'

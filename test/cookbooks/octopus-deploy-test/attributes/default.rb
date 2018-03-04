@@ -27,6 +27,7 @@ default['octopus-deploy-test']['server']['connection-string'] = 'Server=(local)\
 
 # Tentacle test configuration
 default['octopus-deploy-test']['tentacle']['version'] = '3.16.3'
+default['octopus-deploy-test']['tentacle']['installer_url'] = 'https://download.octopusdeploy.com/octopus/Octopus.Tentacle.3.16.3-x64.msi'
 default['octopus-deploy-test']['tentacle']['checksum'] = 'c6874bb29fe8550f275f879264fa60c9b196b39cc97d3148f969c3cc3341d440'
 default['octopus-deploy-test']['tentacle']['instance'] = 'Tentacle'
 default['octopus-deploy-test']['tentacle']['config_path'] = 'C:\\Octopus\\Tentacle.config'

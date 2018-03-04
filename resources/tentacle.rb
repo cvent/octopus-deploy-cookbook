@@ -27,6 +27,7 @@ property :instance, String, default: 'Tentacle'
 property :version, String
 property :checksum, String
 property :home_path, String, default: 'C:\Octopus'
+property :install_url, [String, nil], default: nil
 property :config_path, String, default: 'C:\Octopus\Tentacle.config'
 property :app_path, String, default: 'C:\Octopus\Applications'
 property :trusted_cert, String
@@ -49,11 +50,11 @@ property :public_dns, String, default: node['fqdn']
 default_action :install
 
 action :install do
-  verify_version(new_resource.version)
+  verify_version(new_resource.version, new_resource.install_url)
   verify_checksum(new_resource.checksum)
 
   tentacle_installer = ::File.join(Chef::Config[:file_cache_path], 'octopus-tentacle.msi')
-  install_url = installer_url(new_resource.version)
+  install_url = installer_url(new_resource.version, new_resource.install_url)
 
   remote_file tentacle_installer do
     action :create
@@ -200,8 +201,8 @@ action :uninstall do
   end
 end
 
-def verify_version(version)
-  raise 'A version is required in order to install Octopus Deploy Tentacle' unless version
+def verify_version(version, installer_url)
+  raise 'A version or installer_url is required in order to install Octopus Deploy Tentacle' unless version || installer_url
 end
 
 def verify_checksum(checksum)

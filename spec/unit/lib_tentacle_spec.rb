@@ -62,8 +62,12 @@ describe 'OctopusDeploy::Tentacle' do
   end
 
   describe 'installer_url' do
-    it 'should return the correct installer url' do
-      expect(tentacle.installer_url('3.2.1')).to eq 'https://download.octopusdeploy.com/octopus/Octopus.Tentacle.3.2.1-x64.msi'
+    it 'should return the correct install url if no installer_url is set' do
+      expect(tentacle.installer_url('3.2.1', nil)).to eq 'https://download.octopusdeploy.com/octopus/Octopus.Tentacle.3.2.1-x64.msi'
+    end
+
+    it 'should return the specified installer_url if one is provided' do
+      expect(tentacle.installer_url('3.2.1', 'https://overridden.com/Octopus.Tentacle.3.2.1-x64.msi')).to eq 'https://overridden.com/Octopus.Tentacle.3.2.1-x64.msi'
     end
   end
 
