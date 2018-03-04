@@ -42,7 +42,9 @@ module OctopusDeploy
       'C:\Program Files\Octopus Deploy\Tentacle'
     end
 
-    def installer_url(version)
+    def installer_url(version, url)
+      return url if url
+
       "https://download.octopusdeploy.com/octopus/Octopus.Tentacle.#{version}-x64.msi"
     end
 
