@@ -46,6 +46,7 @@ property :tentacle_name, String, default: node.name
 property :service_user, [String, nil], default: nil
 property :service_password, [String, nil], default: nil
 property :public_dns, String, default: node['fqdn']
+property :tenated_deployment_participation, [Symbol, nil], equal_to: [nil, :Untenanted, :Tenanted, :TenantedOrUntenanted], default: nil
 
 default_action :install
 
@@ -156,7 +157,7 @@ action :register do
     action :run
     cwd tentacle_install_location
     code <<-EOH
-      .\\Tentacle.exe register-with --instance "#{new_resource.instance}" --server "#{new_resource.server}" --name "#{new_resource.tentacle_name}" --publicHostName "#{new_resource.public_dns}" --apiKey "#{new_resource.api_key}" #{register_comm_config(new_resource.polling, port)} #{option_list('environment', environment)} #{option_list('role', new_resource.roles)} #{option_list('tenant', new_resource.tenants)} #{option_list('tenanttag', new_resource.tenant_tags)} --console
+      .\\Tentacle.exe register-with --instance "#{new_resource.instance}" --server "#{new_resource.server}" --name "#{new_resource.tentacle_name}" --publicHostName "#{new_resource.public_dns}" --apiKey "#{new_resource.api_key}" #{register_comm_config(new_resource.polling, port)} #{option_list('environment', environment)} #{option_list('role', new_resource.roles)} #{option_list('tenant', new_resource.tenants)} #{option_list('tenanttag', new_resource.tenant_tags)} #{option_list('tenanted-deployment-participation', new_resource.tenated_deployment_participation)} --console
       #{catch_powershell_error('Registering Tentacle')}
     EOH
     # This is sort of a hack, you need to specify the config_path on register if it is not default

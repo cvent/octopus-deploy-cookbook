@@ -65,4 +65,5 @@ octopus_deploy_tentacle 'configure TentacleWithUser' do
   config_path 'C:\OctopusWithUser\Tentacle.config'
   app_path 'C:\OctopusWithUser\Applications'
   cert_file cert_file
+  tenated_deployment_participation :Untenanted
 end

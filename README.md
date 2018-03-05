@@ -45,7 +45,7 @@ octopus_deploy_server 'OctopusServer' do
 end
 ```
 
-Install MSSQL Express and Octopus Deploy Server 3.17.1 
+Install MSSQL Express and Octopus Deploy Server 3.17.1
 
 **Warning: You will still need to manually grant database db_owner rights. See [issue 119](https://github.com/cvent/octopus-deploy-cookbook/issues/119) for documentation**
 
@@ -93,7 +93,7 @@ end
 - :upgrades_enabled: Whether to upgrade or downgrade the Tentacle version if the windows installer version does not match what is provided in the resource. (Defaults to True)
 - :server: Url to Octopus Deploy Server (e.g https://octopus.example.com)
 - :api_key: Api Key used to register Tentacle to Octopus Server
-- :roles: Array of roles to apply to Tentacle when registering with Octopus Deploy Server (e.g ["web-server","app-server"]) 
+- :roles: Array of roles to apply to Tentacle when registering with Octopus Deploy Server (e.g ["web-server","app-server"])
 - :environment: Which environment or environments the Tentacle will become part of when registering with Octopus Deploy Server (Defaults to node.chef_environment). Accepts string or array.
 - :tenants: Optional array of tenants to add to the Tentacle. Tenant must already exist on Octopus Deploy Server. Requires Octopus 3.4
 - :tenant_tags: Optional array of tenant tags to add to the Tentacle. Tags must already exist on Octopus Deploy Server. If tag is part of a tag group, include the group name followed by a slash `<groupname>/<tag>`. e.g ( Priority/VIP, Datacenter/US ).. Requires Octopus 3.4
@@ -101,6 +101,7 @@ end
 - :service_user: Optional service user name. Defaults to Local System
 - :service_password: Password for service user
 - :public_dns: Optional DNS/IP value to use when registring with the octopus server. Defaults to node['fqdn']
+- :tenated_deployment_participation: Optional type of deployments allowed [:Untenanted, :Tenanted, :TenantedOrUntenanted] (requires tentacle 3.19.0 or newer)
 
 #### Examples
 
