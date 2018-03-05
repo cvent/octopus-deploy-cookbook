@@ -1,5 +1,20 @@
 # Change Log
 
+## [v0.13.0](https://github.com/cvent/octopus-deploy-cookbook/tree/v0.13.0) (2018-03-05)
+[Full Changelog](https://github.com/cvent/octopus-deploy-cookbook/compare/v0.12.0...v0.13.0)
+
+**Merged pull requests:**
+
+- Allow tentacle to run as untenanted [\#130](https://github.com/cvent/octopus-deploy-cookbook/pull/130) ([spuder](https://github.com/spuder))
+- Add tentacle install\_url to override default installer url [\#128](https://github.com/cvent/octopus-deploy-cookbook/pull/128) ([brentm5](https://github.com/brentm5))
+- Make cookbook works for chef 13+ [\#125](https://github.com/cvent/octopus-deploy-cookbook/pull/125) ([brentm5](https://github.com/brentm5))
+- Bump chef\_version in metadata to 12.6.0 [\#116](https://github.com/cvent/octopus-deploy-cookbook/pull/116) ([spuder](https://github.com/spuder))
+- Bump windows cookbook dependency [\#111](https://github.com/cvent/octopus-deploy-cookbook/pull/111) ([spuder](https://github.com/spuder))
+- Update bundler and lock appveyor chefdk version to specific version [\#109](https://github.com/cvent/octopus-deploy-cookbook/pull/109) ([brentm5](https://github.com/brentm5))
+- Adds default node name for server resource [\#108](https://github.com/cvent/octopus-deploy-cookbook/pull/108) ([spuder](https://github.com/spuder))
+- Adds chef\_version requirement to metadata.rb [\#106](https://github.com/cvent/octopus-deploy-cookbook/pull/106) ([spuder](https://github.com/spuder))
+- Validate connection\_string in configure service resource [\#103](https://github.com/cvent/octopus-deploy-cookbook/pull/103) ([spuder](https://github.com/spuder))
+
 ## [v0.12.0](https://github.com/cvent/octopus-deploy-cookbook/tree/v0.12.0) (2017-05-25)
 [Full Changelog](https://github.com/cvent/octopus-deploy-cookbook/compare/v0.11.0...v0.12.0)
 
