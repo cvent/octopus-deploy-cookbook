@@ -32,6 +32,26 @@ describe 'OctopusDeploy::Shared' do
     end
   end
 
+  describe 'option' do
+    it 'should return the command line command for an option' do
+      name = 'name'
+      option = :Test
+      expect(shared.option(name, option)).to eq '--name "Test"'
+    end
+
+    it 'should return nil if name is nil' do
+      name = nil
+      option = :test
+      expect(shared.option(name, option)).to eq nil
+    end
+
+    it 'should return nil if option is nil' do
+      name = 'name'
+      option = nil
+      expect(shared.option(name, option)).to eq nil
+    end
+  end
+
   describe 'installer_options' do
     it 'should return the command line options for msiexec' do
       expect(shared.installer_options).to eq '/qn /norestart'
