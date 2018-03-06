@@ -1,5 +1,13 @@
 # Change Log
 
+## [v0.13.1](https://github.com/cvent/octopus-deploy-cookbook/tree/v0.13.1) (2018-03-05)
+[Full Changelog](https://github.com/cvent/octopus-deploy-cookbook/compare/v0.13.0...v0.13.1)
+
+**Merged pull requests:**
+
+- Fix an issue with registering tentacles with tenated\_deployment\_participation not specified [\#136](https://github.com/cvent/octopus-deploy-cookbook/pull/136) ([brentm5](https://github.com/brentm5))
+- Correct readme database instructions [\#133](https://github.com/cvent/octopus-deploy-cookbook/pull/133) ([spuder](https://github.com/spuder))
+
 ## [v0.13.0](https://github.com/cvent/octopus-deploy-cookbook/tree/v0.13.0) (2018-03-05)
 [Full Changelog](https://github.com/cvent/octopus-deploy-cookbook/compare/v0.12.0...v0.13.0)
 
