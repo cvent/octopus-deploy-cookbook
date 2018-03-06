@@ -37,6 +37,7 @@ This is pre release and there will be major changes to this before its final rel
 #### Example
 Install version 3.17.1 of Octopus Deploy Server
 
+
 ```ruby
 octopus_deploy_server 'OctopusServer' do
   action :install
@@ -45,16 +46,9 @@ octopus_deploy_server 'OctopusServer' do
 end
 ```
 
-Install MSSQL Express and Octopus Deploy Server 3.17.1
-
-**Warning: You will still need to manually grant database db_owner rights. See [issue 119](https://github.com/cvent/octopus-deploy-cookbook/issues/119) for documentation**
+**This cookbook does not setup the database. You will need a preexisting SQLEXPRESS/MSSQL database instance**
 
 ```ruby
-chocolatey_package 'mssqlserver2014express' do
-  action :install
-  options '--cachelocation c:\temp\choco'
-end
-
 octopus_database = "OctopusDeploy"
 
 octopus_deploy_server 'OctopusServer' do
