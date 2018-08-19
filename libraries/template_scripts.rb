@@ -2,7 +2,7 @@
 #
 # Author:: Brent Montague (<bmontague@cvent.com>)
 # Cookbook Name:: octopus-deploy
-# Library:: server
+# Library:: TemplateScripts
 #
 # Copyright:: Copyright (c) 2015 Cvent, Inc.
 #
@@ -20,31 +20,27 @@
 #
 
 require_relative 'shared'
-require_relative 'server_scripts'
 
-module OctopusDeploy
-  # A container to hold the server values instead of attributes
-  module Server
-    include OctopusDeploy::Shared
+class TemplateScripts
+  include OctopusDeploy::Shared
 
-    def display_name
-      'Octopus Deploy Server'
-    end
+  def create_instance(_resource)
+    raise 'Method not overwritten'
+  end
 
-    def service_name
-      'OctopusDeploy'
-    end
+  def configure_instance(_resource)
+    raise 'Method not overwritten'
+  end
 
-    def server_install_location
-      'C:\Program Files\Octopus Deploy\Octopus'
-    end
+  def delete_instance(_resource)
+    raise 'Method not overwritten'
+  end
 
-    def installer_url(version)
-      "https://download.octopusdeploy.com/octopus/Octopus.#{version}-x64.msi"
-    end
+  def generate_script(template, binder)
+    ERB.new(template).result(binder)
+  end
 
-    def scripts
-      @scripts ||= ServerScripts.new
-    end
+  def catch_powershell_error(error_text)
+    "if ( ! $? ) { throw \"ERROR: Command returned $LastExitCode #{error_text}\" }"
   end
 end

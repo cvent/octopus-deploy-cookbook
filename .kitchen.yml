@@ -5,6 +5,7 @@ driver:
 provisioner:
   name: chef_zero
   require_chef_omnibus: latest
+  log_level: info
 
 verifier:
   name: inspec
