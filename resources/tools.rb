@@ -21,9 +21,9 @@
 
 resource_name 'octopus_deploy_tools'
 
-property :path, kind_of: String, name_attribute: true
-property :source, kind_of: String, required: true
-property :checksum, kind_of: String
+property :path, String, name_property: true
+property :source, String, required: true
+property :checksum, String
 
 default_action :install
 
