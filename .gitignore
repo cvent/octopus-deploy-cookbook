@@ -12,3 +12,5 @@ Berksfile.lock
 vendor/
 .rubocop-http*
 coverage/
+
+.idea
