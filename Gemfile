@@ -13,6 +13,7 @@ group :development do
   gem 'berkshelf'
   gem 'codecov'
   gem 'webmock'
+  gem 'nokogiri'
 end
 
 group :appveyor do

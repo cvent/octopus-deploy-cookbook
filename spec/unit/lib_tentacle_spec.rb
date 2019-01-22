@@ -94,4 +94,14 @@ describe 'OctopusDeploy::Tentacle' do
       expect(tentacle.resolve_port(false)).to eq 10_933
     end
   end
+
+  describe 'proxy_command' do
+    it 'should return Polling proxy for polling tentacle' do
+      expect(tentacle.proxy_command(true)).to eq 'polling-proxy'
+    end
+
+    it 'should return Proxy for non-polling tentacle' do
+      expect(tentacle.proxy_command(false)).to eq 'proxy'
+    end
+  end
 end

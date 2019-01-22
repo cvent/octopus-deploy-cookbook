@@ -118,6 +118,8 @@ action :configure do
       #{catch_powershell_error('Configuring instance')}
       .\\Tentacle.exe configure --instance="#{new_resource.instance}" --trust="#{new_resource.trusted_cert}" --console
       #{catch_powershell_error('Trusting Octopus Deploy Server')}
+      .\\Tentacle.exe #{proxy_command(new_resource.polling)} --instance="#{new_resource.instance}" --proxyEnable=False
+      #{catch_powershell_error('Configuring proxy')}
       .\\Tentacle.exe service --instance="#{new_resource.instance}" --install --console
       #{catch_powershell_error('Installing Service')}
     EOH

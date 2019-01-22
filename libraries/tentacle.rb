@@ -80,5 +80,13 @@ module OctopusDeploy
         10_933
       end
     end
+
+    def proxy_command(polling)
+      if polling
+        'polling-proxy'
+      else
+        'proxy'
+      end
+    end
   end
 end

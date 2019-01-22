@@ -210,7 +210,7 @@ GEM
       net-ssh-gateway (>= 1.2.0)
     net-telnet (0.1.1)
     nio4r (2.1.0)
-    nokogiri (1.8.1)
+    nokogiri (1.8.5)
       mini_portile2 (~> 2.3.0)
     nori (2.6.0)
     octokit (4.8.0)
@@ -394,10 +394,11 @@ DEPENDENCIES
   kitchen-inspec
   kitchen-localhost
   kitchen-vagrant
+  nokogiri
   rake (< 11)
   rspec
   stove
   webmock
 
 BUNDLED WITH
-   1.16.0
+   1.16.1
