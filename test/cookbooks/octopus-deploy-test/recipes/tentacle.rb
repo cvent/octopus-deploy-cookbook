@@ -21,8 +21,12 @@
 
 tentacle = node['octopus-deploy-test']['tentacle']
 
-# This section will mock out the certificate creation
-cert_file = 'C:\tentacle_cert.txt'
+# This section will mock out the certificate creationa
+cert_directory = 'C:\Octopus Certificate'
+cert_file = File.join(cert_directory, 'tentacle_cert.txt')
+
+directory cert_directory
+
 cookbook_file cert_file do
   action :create
   source 'cert.txt'
