@@ -108,7 +108,7 @@ action :configure do
     cwd tentacle_install_location
     sensitive new_resource.sensitive
     code <<-EOH
-      .\\Tentacle.exe import-certificate --instance="#{new_resource.instance}" -f #{new_resource.cert_file} --console
+      .\\Tentacle.exe import-certificate --instance="#{new_resource.instance}" --from-file="#{new_resource.cert_file}" --console
       #{catch_powershell_error('Importing Certificate that was generated for the machine')}
       .\\Tentacle.exe new-certificate --instance="#{new_resource.instance}" --if-blank --console
       #{catch_powershell_error('Generating Certificate if the Import failed')}
