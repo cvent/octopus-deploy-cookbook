@@ -28,7 +28,7 @@ install:
   - SET PATH=C:\opscode\chefdk\bin;%PATH%
 
 before_build:
-  - chef exec bundle install --with="appveyor"
+  - chef exec bundle install --without development
   - copy .kitchen.appveyor.yml .kitchen.yml
 
 build_script:
