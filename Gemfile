@@ -5,7 +5,7 @@ group :development do
   gem 'chef'
   gem 'github_changelog_generator'
   gem 'rake', '< 11'
-  gem 'foodcritic', '~> 4.0'
+  gem 'foodcritic', '~> 4.0', '>= 4.0.0'
   gem 'cookstyle'
   gem 'kitchen-vagrant'
   gem 'kitchen-inspec'
@@ -13,7 +13,7 @@ group :development do
   gem 'berkshelf'
   gem 'codecov'
   gem 'webmock'
-  gem 'nokogiri'
+  gem 'nokogiri', '>= 1.10.4'
 end
 
 group :appveyor do
