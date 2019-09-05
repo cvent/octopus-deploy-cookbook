@@ -28,6 +28,7 @@ install:
   - SET PATH=C:\opscode\chefdk\bin;%PATH%
 
 before_build:
+  - chef gem install bundler -v 2.0.2
   - chef exec bundle install --without development
   - copy .kitchen.appveyor.yml .kitchen.yml
 
