@@ -7,8 +7,8 @@ group :development do
   gem 'rake', '< 11'
   gem 'foodcritic', '~> 4.0'
   gem 'cookstyle'
-  gem 'kitchen-vagrant'
-  gem 'kitchen-inspec'
+  gem 'kitchen-vagrant', '>= 1.3.6'
+  gem 'kitchen-inspec', '>= 0.26.0'
   gem 'rspec'
   gem 'berkshelf'
   gem 'codecov'
@@ -17,5 +17,5 @@ group :development do
 end
 
 group :appveyor do
-  gem 'kitchen-localhost'
+  gem 'kitchen-localhost', '>= 0.3.0'
 end
