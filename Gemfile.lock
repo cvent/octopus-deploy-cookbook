@@ -239,7 +239,7 @@ GEM
       faraday (~> 0.9)
       faraday-cookie_jar (~> 0.0.6)
       ms_rest (~> 0.7.2)
-    multi_json (1.13.1)
+    multi_json (1.14.1)
     multipart-post (2.0.0)
     necromancer (0.4.0)
     net-scp (1.2.1)
@@ -253,7 +253,7 @@ GEM
       net-ssh (>= 2.6.5)
       net-ssh-gateway (>= 1.2.0)
     net-telnet (0.1.1)
-    nokogiri (1.10.1)
+    nokogiri (1.10.5)
       mini_portile2 (~> 2.4.0)
     nori (2.6.0)
     octokit (4.13.0)
@@ -462,16 +462,16 @@ DEPENDENCIES
   chef
   codecov
   cookstyle
-  foodcritic (~> 4.0)
+  foodcritic (~> 4.0, >= 4.0.0)
   github_changelog_generator
   kitchen-inspec
   kitchen-localhost
   kitchen-vagrant
-  nokogiri
+  nokogiri (>= 1.10.5)
   rake (< 11)
   rspec
   stove
   webmock
 
 BUNDLED WITH
-   1.16.2
+   1.17.3
