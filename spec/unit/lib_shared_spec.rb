@@ -32,6 +32,28 @@ describe 'OctopusDeploy::Shared' do
     end
   end
 
+  describe 'option_flag' do
+    it 'should return --attr flag if name is valid and value is true' do
+      name = 'attr'
+      value = true
+      expect(shared.option_flag(name, value)).to eq '--attr '
+    end
+
+    it 'should return empty string if name is valid and value is false' do
+      name = 'attr'
+      value = false
+      expect(shared.option_flag(name, value)).to eq ''
+    end
+
+    it 'should return empty string if inputs are invalid' do
+      expect(shared.option_flag('', false)).to eq ''
+      expect(shared.option_flag('', true)).to eq ''
+      expect(shared.option_flag(nil, true)).to eq ''
+      expect(shared.option_flag(nil, false)).to eq ''
+      expect(shared.option_flag('attr', nil)).to eq ''
+    end
+  end
+
   describe 'option' do
     it 'should return the command line command for an option' do
       name = 'name'
