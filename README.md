@@ -89,6 +89,7 @@ end
 - :api_key: Api Key used to register Tentacle to Octopus Server
 - :roles: Array of roles to apply to Tentacle when registering with Octopus Deploy Server (e.g ["web-server","app-server"])
 - :environment: Which environment or environments the Tentacle will become part of when registering with Octopus Deploy Server (Defaults to node.chef_environment). Accepts string or array.
+- :forced_registration: Whether the command should include `--force` to support overwriting tentacle references that already exist in Octopus Server
 - :tenants: Optional array of tenants to add to the Tentacle. Tenant must already exist on Octopus Deploy Server. Requires Octopus 3.4
 - :tenant_tags: Optional array of tenant tags to add to the Tentacle. Tags must already exist on Octopus Deploy Server. If tag is part of a tag group, include the group name followed by a slash `<groupname>/<tag>`. e.g ( Priority/VIP, Datacenter/US ).. Requires Octopus 3.4
 - :tentacle_name: Optional custom name for Tentacle. Defaults to the Chef node name

@@ -36,7 +36,7 @@ module OctopusDeploy
 
     # Includes the named option based on boolean input
     def option_flag(name, value)
-      name && name.length > 0 && value ? "--#{name} " : ''
+      name && !name.empty? && value ? "--#{name} " : ''
     end
 
     def option(name, option)
