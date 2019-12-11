@@ -4,6 +4,10 @@ branches:
 
 version: 1.0.{build}
 
+environment:
+  machine_user: test_user
+  machine_pass: Pass@word1
+
 pull_requests:
   do_not_increment_build_number: true
 
@@ -24,11 +28,17 @@ init:
   - ps: $PSVersionTable
 
 install:
-  - ps: . { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install -channel stable -project chefdk -version 3.8.14
+  - ps: . { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install -channel stable -project chefdk -version 4.6.35
   - SET PATH=C:\opscode\chefdk\bin;%PATH%
+  - ps: secedit /export /cfg $env:temp/export.cfg
+  - ps: ((get-content $env:temp/export.cfg) -replace ('PasswordComplexity = 1', 'PasswordComplexity = 0')) | Out-File $env:temp/export.cfg
+  - ps: ((get-content $env:temp/export.cfg) -replace ('MinimumPasswordLength = 8', 'MinimumPasswordLength = 0')) | Out-File $env:temp/export.cfg
+  - ps: secedit /configure /db $env:windir/security/new.sdb /cfg $env:temp/export.cfg /areas SECURITYPOLICY
+  - ps: net user /add $env:machine_user $env:machine_pass
+  - ps: net localgroup administrators $env:machine_user /add
+  - SET CHEF_LICENSE=accept-silent
 
 before_build:
-  - chef exec bundle install --without development
   - copy .kitchen.appveyor.yml .kitchen.yml
 
 build_script:

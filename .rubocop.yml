@@ -6,3 +6,5 @@ AllCops:
     - 'vendor/**/*'
 Metrics/LineLength:
   Max: 160
+ChefModernize/WindowsZipfileUsage:
+  Enabled: false

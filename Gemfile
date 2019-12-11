@@ -15,7 +15,3 @@ group :development do
   gem 'webmock'
   gem 'nokogiri'
 end
-
-group :appveyor do
-  gem 'kitchen-localhost'
-end

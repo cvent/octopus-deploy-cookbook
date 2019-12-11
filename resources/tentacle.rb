@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 #
 # Author:: Brent Montague (<bmontague@cvent.com>)
-# Cookbook Name:: octopus-deploy
+# Cookbook:: octopus-deploy
 # Resource:: tentacle
 #
 # Copyright:: Copyright (c) 2015 Cvent, Inc.
@@ -139,8 +139,8 @@ action :configure do
   # Make sure enabled and started
   windows_service service_name do
     action [:enable, :start]
-    run_as_user new_resource.service_user
-    run_as_password new_resource.service_password
+    run_as_user new_resource.service_user if new_resource.service_user
+    run_as_password new_resource.service_password if new_resource.service_password
     sensitive new_resource.sensitive
   end
 end
