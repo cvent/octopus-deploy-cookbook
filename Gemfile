@@ -8,7 +8,7 @@ group :development do
   gem 'foodcritic', '~> 4.0'
   gem 'cookstyle'
   gem 'kitchen-vagrant'
-  gem 'kitchen-inspec'
+  gem 'kitchen-inspec', '>= 0.26.0'
   gem 'rspec'
   gem 'berkshelf'
   gem 'codecov'
