@@ -1,12 +1,17 @@
 ---
 driver:
-  name: localhost
-  clean_up_on_destroy: false
+  name: proxy
+  host: localhost
+  reset_command: "exit 0"
+  port: 5985
+  username: <%= ENV["machine_user"] %>
+  password: <%= ENV["machine_pass"] %>
 
 provisioner:
   name: chef_zero
   require_chef_omnibus: latest
   log_level: info
+  chef_license: accept
 
 verifier:
   name: inspec
