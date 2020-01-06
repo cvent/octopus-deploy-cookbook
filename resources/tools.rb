@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 #
 # Author:: Brent Montague (<bmontague@cvent.com>)
-# Cookbook Name:: octopus-deploy
+# Cookbook:: octopus-deploy
 # Resource:: tools
 #
 # Copyright:: Copyright (c) 2015 Cvent, Inc.
