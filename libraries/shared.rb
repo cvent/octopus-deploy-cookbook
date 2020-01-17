@@ -34,6 +34,11 @@ module OctopusDeploy
       options.map { |option| option(name, option) }.join(' ') if name && options
     end
 
+    # Includes the named option based on boolean input
+    def option_flag(name, value)
+      name && !name.empty? && value ? "--#{name} " : ''
+    end
+
     def option(name, option)
       "--#{name} \"#{option}\"" if name && option
     end
