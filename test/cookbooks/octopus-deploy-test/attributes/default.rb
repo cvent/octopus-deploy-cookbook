@@ -20,14 +20,14 @@
 #
 
 # Server test configuration
-default['octopus-deploy-test']['server']['version'] = '3.2.24'
-default['octopus-deploy-test']['server']['checksum'] = 'fe82d0ebd4d0cc9baa38962d8224578154131856a3c3e63621e4834efa3006d7'
+default['octopus-deploy-test']['server']['version'] = '2018.7.2'
+default['octopus-deploy-test']['server']['checksum'] = '89645C258354DE1C8038B5AD630E2EB8F3F1ECE096699A17300636BD116C2423'
 default['octopus-deploy-test']['server']['master-key'] = 'wJ+qLI8AjSvtdtIt05eW7w=='
 default['octopus-deploy-test']['server']['connection-string'] = 'Server=(local)\SQL2016;Database=master;User ID=sa;Password=Password12!'
 
 # Tentacle test configuration
-default['octopus-deploy-test']['tentacle']['version'] = '3.19.0'
-default['octopus-deploy-test']['tentacle']['installer_url'] = 'https://download.octopusdeploy.com/octopus/Octopus.Tentacle.3.19.0-x64.msi'
-default['octopus-deploy-test']['tentacle']['checksum'] = 'a37b6c16494f16e7de03566de737a8c437267a227e287ed2f3f4d0ecab9eadee'
+default['octopus-deploy-test']['tentacle']['version'] = '3.22.0'
+default['octopus-deploy-test']['tentacle']['installer_url'] = 'https://download.octopusdeploy.com/octopus/Octopus.Tentacle.3.22.0-x64.msi'
+default['octopus-deploy-test']['tentacle']['checksum'] = '197AB79A95ADEE15AB0058BF0FA73D9E8AF2AA6AEF1741BEB39170C3A1D72CAB'
 default['octopus-deploy-test']['tentacle']['instance'] = 'Tentacle'
 default['octopus-deploy-test']['tentacle']['config_path'] = 'C:\\Octopus\\Tentacle.config'
