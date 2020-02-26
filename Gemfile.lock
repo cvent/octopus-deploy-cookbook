@@ -410,7 +410,7 @@ GEM
     net-ssh-multi (1.2.1)
       net-ssh (>= 2.6.5)
       net-ssh-gateway (>= 1.2.0)
-    nokogiri (1.10.7)
+    nokogiri (1.10.8)
       mini_portile2 (~> 2.4.0)
     nori (2.6.0)
     octokit (4.14.0)
@@ -663,11 +663,11 @@ DEPENDENCIES
   chef
   codecov
   cookstyle
-  foodcritic (~> 4.0)
+  foodcritic (~> 4.0, >= 4.0.0)
   github_changelog_generator
   kitchen-inspec
   kitchen-vagrant
-  nokogiri
+  nokogiri (>= 1.10.8)
   rake (< 11)
   rspec
   stove
