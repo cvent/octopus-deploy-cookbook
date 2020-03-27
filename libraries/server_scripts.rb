@@ -71,9 +71,9 @@ class ServerScripts < TemplateScripts
         --console
       <%= catch_powershell_error('Configuring Home Dir') %>
 
-      .\\Octopus.Server.exe configure `
+      .\\Octopus.Server.exe database `
         <%= option('instance', resource.instance) %> `
-        <%= option('storageConnectionString', resource.connection_string) %> `
+        <%= option('connectionString', resource.connection_string) %> `
         --console
       <%= catch_powershell_error('Configuring Database Connection') %>
 
