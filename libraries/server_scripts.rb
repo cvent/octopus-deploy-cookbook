@@ -74,8 +74,9 @@ class ServerScripts < TemplateScripts
       .\\Octopus.Server.exe database `
         <%= option('instance', resource.instance) %> `
         <%= option('connectionString', resource.connection_string) %> `
+        <% if resource.create_database %>--create<% end %> `
         --console
-      <%= catch_powershell_error('Configuring Database Connection') %>
+      <%= resource.create_database ? catch_powershell_error('Create Database Connection') : catch_powershell_error('Configuring Database Connection') %>
 
       .\\Octopus.Server.exe configure `
         <%= option('instance', resource.instance) %> `
@@ -110,14 +111,6 @@ class ServerScripts < TemplateScripts
           <%= option('masterkey', resource.master_key) %> `
           --console
         <%= catch_powershell_error('Configuring Master Key') %>
-      <% end %>
-
-      <% if resource.create_database %>
-        .\\Octopus.Server.exe database `
-          <%= option('instance', resource.instance) %> `
-          --create `
-          --console
-        <%= catch_powershell_error('Create Database') %>
       <% end %>
 
       .\\Octopus.Server.exe service `

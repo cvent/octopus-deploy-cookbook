@@ -21,7 +21,7 @@ suites:
     attributes:
       octopus-deploy-test:
         server:
-          create-database: false
+          create-database: true
           start-service: false
   - name: tentacle
     run_list:
