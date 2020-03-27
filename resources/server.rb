@@ -33,6 +33,8 @@ property :master_key, String
 property :node_name, String, default: node.name
 property :create_database, [true, false], default: false
 property :admin_user, String
+property :user, String, default: nil
+property :password, String, sensitive: true, default: nil
 property :license, String
 property :start_service, [true, false], default: true
 
@@ -75,6 +77,8 @@ action :configure do
     action :run
     cwd server_install_location
     sensitive new_resource.sensitive
+    user new_resource.user
+    password new_resource.password
     code scripts.configure_instance(new_resource)
     not_if { ::Win32::Service.exists?(service_name) }
   end

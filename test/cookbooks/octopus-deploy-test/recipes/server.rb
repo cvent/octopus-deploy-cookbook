@@ -25,6 +25,8 @@ octopus_deploy_server 'OctopusServer' do
   version node['octopus-deploy-test']['server']['version']
   checksum node['octopus-deploy-test']['server']['checksum']
   node_name 'octo-web-01'
+  user ENV['machine_user']
+  password ENV['machine_password']
   connection_string node['octopus-deploy-test']['server']['connection-string']
   master_key node['octopus-deploy-test']['server']['master-key']
   start_service node['octopus-deploy-test']['server']['start-service']
