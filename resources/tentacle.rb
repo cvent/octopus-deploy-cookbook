@@ -43,6 +43,7 @@ property :environment, [String, Array], default: node.chef_environment
 property :tenants, [Array, nil], default: nil
 property :tenant_tags, [Array, nil], default: nil
 property :tentacle_name, String, default: node.name
+property :workerpool, [String, nil], default: nil
 property :forced_registration, [true, false], default: false
 property :service_user, [String, nil], default: nil
 property :service_password, [String, nil], default: nil
@@ -186,6 +187,35 @@ action :register do
   end
 end
 
+action :register_worker do
+  service_name = service_name(new_resource.instance)
+
+  verify_server(new_resource.server)
+  verify_api_key(new_resource.api_key)
+  verify_workerpool(new_resource.workerpool)
+
+  powershell_script "register-#{new_resource.instance}-worker" do
+    action :run
+    cwd tentacle_install_location
+    code <<-EOH
+      .\\Tentacle.exe register-worker `
+        --name "#{new_resource.tentacle_name}" `
+        --server "#{new_resource.server}" `
+        --apiKey "#{new_resource.api_key}" `
+        #{option('workerpool', new_resource.workerpool)} `
+        #{option_flag('force', new_resource.forced_registration)} `
+        --console
+      #{catch_powershell_error('Registering Worker')}
+    EOH
+    not_if { tentacle_exists?(new_resource.server, new_resource.api_key, tentacle_thumbprint(new_resource.config_path), 'workers') }
+    notifies :restart, "windows_service[#{service_name}]", :delayed
+  end
+
+  windows_service service_name do
+    action :nothing
+  end
+end
+
 action :remove do
   service_name = service_name(new_resource.instance)
 
@@ -203,6 +233,21 @@ action :remove do
 
   file new_resource.config_path do
     action :delete
+  end
+end
+
+action :remove_worker do
+  verify_server(new_resource.server)
+  verify_api_key(new_resource.api_key)
+
+  powershell_script "remove-worker-instance-#{new_resource.instance}" do
+    action :run
+    cwd tentacle_install_location
+    code <<-EOH
+      .\\Tentacle.exe deregister-worker --instance "#{new_resource.instance}" --server "#{new_resource.server}" --apiKey "#{new_resource.api_key}"
+      #{catch_powershell_error('Deregistering worker')}
+    EOH
+    only_if { tentacle_exists?(new_resource.server, new_resource.api_key, tentacle_thumbprint(new_resource.config_path), 'workers') }
   end
 end
 
@@ -239,4 +284,8 @@ end
 
 def verify_environment(environment)
   raise 'At least 1 environment is required in order to register a Tentacle with Octopus Deploy Server' if environment.nil? || environment.empty?
+end
+
+def verify_workerpool(workerpool)
+  raise 'A workerpool is required in order to register a worker with Octopus Deploy Server' unless workerpool
 end

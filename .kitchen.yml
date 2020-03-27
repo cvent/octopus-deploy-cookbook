@@ -26,6 +26,9 @@ suites:
   - name: tentacle
     run_list:
       - recipe[octopus-deploy-test::tentacle]
+  - name: worker
+    run_list:
+      - recipe[octopus-deploy-test::worker]
   - name: tools
     run_list:
       - recipe[octopus-deploy-test::tools]

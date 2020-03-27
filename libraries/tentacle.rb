@@ -48,8 +48,8 @@ module OctopusDeploy
       "https://download.octopusdeploy.com/octopus/Octopus.Tentacle.#{version}-x64.msi"
     end
 
-    def tentacle_exists?(server, api_key, thumbprint)
-      ::JSON.parse(api_client(server, api_key).get("/machines/all?thumbprint=#{thumbprint}")).any? do |machine|
+    def tentacle_exists?(server, api_key, thumbprint, type = 'machines')
+      ::JSON.parse(api_client(server, api_key).get("/#{type}/all?thumbprint=#{thumbprint}")).any? do |machine|
         machine['Thumbprint'] == thumbprint
       end
     end
