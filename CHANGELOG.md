@@ -1,5 +1,11 @@
 # Change Log
 
+## [v0.13.3](https://github.com/cvent/octopus-deploy-cookbook/tree/v0.13.3) (2020-08-27)
+- Fix an issue with registering new tentacles with tentacle version 5.0.13 or above [\#173](https://github.com/cvent/octopus-deploy-cookbook/pull/173) ([NamanKumarCvent](https://github.com/NamanKumarCvent))
+- Updating gemlock on codecov to latest (0.2.8), anything prior to 0.2.0 is not supported [\#173](https://github.com/cvent/octopus-deploy-cookbook/pull/173) ([NamanKumarCvent](https://github.com/NamanKumarCvent))
+
+**Merged pull requests:**
+
 ## [v0.13.2](https://github.com/cvent/octopus-deploy-cookbook/tree/v0.13.2) (2019-04-09)
 [Full Changelog](https://github.com/cvent/octopus-deploy-cookbook/compare/v0.13.1...v0.13.2)
 

@@ -6,7 +6,7 @@ license 'Apache-2.0'
 description 'Handles installing Octopus Deploy Server &| Tentacle'
 source_url 'https://github.com/cvent/octopus-deploy-cookbook'
 issues_url 'https://github.com/cvent/octopus-deploy-cookbook/issues'
-version '0.13.2'
+version '0.13.3'
 
 depends 'windows'
 depends 'windows_firewall', '~> 3.0'

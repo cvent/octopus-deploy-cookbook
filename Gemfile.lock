@@ -226,7 +226,7 @@ GEM
       rack (~> 2.0, >= 2.0.6)
       uuidtools (~> 2.1)
     cleanroom (1.0.0)
-    codecov (0.1.16)
+    codecov (0.2.8)
       json
       simplecov
       url
