@@ -71,7 +71,7 @@ action :configure do
     not_if { ::File.exist?(new_resource.config_path) }
   end
 
-  powershell_script "configure-server-#{new_resource.instance}" do # ~FC009
+  powershell_script "configure-server-#{new_resource.instance}" do
     action :run
     cwd server_install_location
     sensitive new_resource.sensitive

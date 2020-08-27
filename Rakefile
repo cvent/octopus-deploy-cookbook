@@ -6,7 +6,6 @@ Dir.glob('tasks/*.rake').each { |r| import r }
 require 'stove/rake_task'
 require 'cookstyle'
 require 'rubocop/rake_task'
-require 'foodcritic'
 require 'rspec/core/rake_task'
 
 # Publish This cookbook
@@ -14,15 +13,8 @@ Stove::RakeTask.new
 
 # Style tests. Rubocop and Foodcritic
 namespace :style do
-  desc 'Run Ruby style checks'
-  RuboCop::RakeTask.new(:ruby)
-
-  desc 'Run Chef style checks'
-  FoodCritic::Rake::LintTask.new(:chef) do |t|
-    t.options = {
-      fail_tags: ['any']
-    }
-  end
+  desc 'Run style checks'
+  RuboCop::RakeTask.new(:chef)
 end
 
 # Style tests. Rubocop and Foodcritic
@@ -32,7 +24,7 @@ namespace :test do
 end
 
 desc 'Run all style checks'
-task style: ['style:chef', 'style:ruby']
+task style: ['style:chef']
 
 desc 'Run all test'
 task test: ['test:unit']

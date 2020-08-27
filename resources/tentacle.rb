@@ -27,7 +27,7 @@ property :instance, String, default: 'Tentacle'
 property :version, String
 property :checksum, String
 property :home_path, String, default: 'C:\Octopus'
-property :install_url, [String, nil], default: nil
+property :install_url, [String, nil]
 property :config_path, String, default: 'C:\Octopus\Tentacle.config'
 property :app_path, String, default: 'C:\Octopus\Applications'
 property :trusted_cert, String
@@ -44,9 +44,9 @@ property :tenants, [Array, nil], default: nil
 property :tenant_tags, [Array, nil], default: nil
 property :tentacle_name, String, default: node.name
 property :forced_registration, [true, false], default: false
-property :service_user, [String, nil], default: nil
-property :service_password, [String, nil], default: nil
-property :public_dns, String, default: node['fqdn']
+property :service_user, [String, nil]
+property :service_password, [String, nil]
+property :public_dns, String, default: lazy { node['fqdn'] }
 property :tenated_deployment_participation, [Symbol, nil], equal_to: [nil, :Untenanted, :Tenanted, :TenantedOrUntenanted], default: nil
 
 default_action :install
@@ -104,7 +104,7 @@ action :configure do
     not_if { new_resource.cert_file.nil? || ::File.exist?(new_resource.cert_file) }
   end
 
-  powershell_script "configure-tentacle-#{new_resource.instance}" do # ~FC009
+  powershell_script "configure-tentacle-#{new_resource.instance}" do
     action :run
     cwd tentacle_install_location
     sensitive new_resource.sensitive
