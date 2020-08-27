@@ -84,16 +84,6 @@ action :configure do
     recursive true
   end
 
-  powershell_script "generate-tentacle-cert-#{new_resource.instance}" do
-    action :run
-    cwd tentacle_install_location
-    code <<-EOH
-      .\\Tentacle.exe new-certificate -e "#{new_resource.cert_file}" --console
-      #{catch_powershell_error('Generating Cert for the machine')}
-    EOH
-    not_if { new_resource.cert_file.nil? || ::File.exist?(new_resource.cert_file) }
-  end
-
   powershell_script "create-instance-#{new_resource.instance}" do
     action :run
     cwd tentacle_install_location
@@ -102,6 +92,16 @@ action :configure do
       #{catch_powershell_error('Creating instance')}
     EOH
     not_if { ::File.exist?(new_resource.config_path) }
+  end
+
+  powershell_script "generate-tentacle-cert-#{new_resource.instance}" do
+    action :run
+    cwd tentacle_install_location
+    code <<-EOH
+      .\\Tentacle.exe new-certificate -e "#{new_resource.cert_file}" --console
+      #{catch_powershell_error('Generating Cert for the machine')}
+    EOH
+    not_if { new_resource.cert_file.nil? || ::File.exist?(new_resource.cert_file) }
   end
 
   powershell_script "configure-tentacle-#{new_resource.instance}" do # ~FC009
