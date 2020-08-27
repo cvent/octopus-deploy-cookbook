@@ -5,7 +5,6 @@ group :development do
   gem 'chef'
   gem 'github_changelog_generator'
   gem 'rake', '< 11'
-  gem 'foodcritic', '~> 4.0'
   gem 'cookstyle'
   gem 'kitchen-vagrant'
   gem 'kitchen-inspec'
