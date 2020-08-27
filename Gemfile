@@ -4,7 +4,7 @@ group :development do
   gem 'stove'
   gem 'chef'
   gem 'github_changelog_generator'
-  gem 'rake', '< 11'
+  gem 'rake', '< 13'
   gem 'cookstyle'
   gem 'kitchen-vagrant'
   gem 'kitchen-inspec'

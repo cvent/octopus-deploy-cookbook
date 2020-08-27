@@ -452,7 +452,7 @@ GEM
     public_suffix (4.0.5)
     rack (2.2.3)
     rainbow (3.0.0)
-    rake (10.5.0)
+    rake (12.3.3)
     regexp_parser (1.7.1)
     representable (3.0.4)
       declarative (< 0.1.0)
@@ -676,7 +676,7 @@ DEPENDENCIES
   kitchen-inspec
   kitchen-vagrant
   nokogiri
-  rake (< 11)
+  rake (< 13)
   rspec
   stove
   webmock
