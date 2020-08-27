@@ -7,6 +7,8 @@ begin
   metadata.from_file('metadata.rb')
 
   GitHubChangelogGenerator::RakeTask.new :changelog do |config|
+    config.user = 'cvent'
+    config.project = 'octopus-deploy-cookbook'
     config.since_tag = 'v0.5.0'
     config.future_release = "v#{metadata.version}"
     config.issues = false
