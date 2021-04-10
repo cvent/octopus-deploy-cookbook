@@ -5,7 +5,7 @@ group :development do
   gem 'chef'
   gem 'github_changelog_generator'
   gem 'rake', '< 13'
-  gem 'cookstyle'
+  gem 'cookstyle', '>= 6.15.9'
   gem 'kitchen-vagrant'
   gem 'kitchen-inspec'
   gem 'rspec'
