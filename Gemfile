@@ -12,5 +12,5 @@ group :development do
   gem 'berkshelf'
   gem 'codecov'
   gem 'webmock'
-  gem 'nokogiri'
+  gem 'nokogiri', '>= 1.13.2'
 end
